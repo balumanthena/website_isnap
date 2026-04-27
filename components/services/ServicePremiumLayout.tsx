@@ -21,47 +21,79 @@ function parseResultStat(line: string): { big: string; rest: string } {
   if (reduced) return { big: reduced[1], rest: "Reduced manual dependency by" };
   const leadPct = line.match(/^(\d+%)\s+(.+)$/);
   if (leadPct) return { big: leadPct[1], rest: leadPct[2] };
+  const leadRange = line.match(/^(\d+\s*[xX](?:\s*[-–]\s*\d+\s*[xX])?(?:\+)?)\s+(.+)$/);
+  if (leadRange) return { big: leadRange[1].replace(/\s+/g, ""), rest: leadRange[2] };
+  const leadPctPlus = line.match(/^(\d+%\+?)\s+(.+)$/);
+  if (leadPctPlus) return { big: leadPctPlus[1], rest: leadPctPlus[2] };
   return { big: line, rest: "" };
 }
 
-function HeroMockup() {
+function ProgramFrame({
+  processCount,
+  benefitsCount,
+  toolsCount
+}: {
+  processCount: number;
+  benefitsCount: number;
+  toolsCount: number;
+}) {
   return (
-    <div className="relative mx-auto w-full max-w-lg">
+    <div className="relative mx-auto w-full max-w-xl">
       <div
-        className="pointer-events-none absolute -inset-8 rounded-[2rem] opacity-90 blur-3xl"
+        className="pointer-events-none absolute -inset-6 rounded-[2rem] opacity-90 blur-3xl"
         style={{
-          background: `radial-gradient(ellipse at 50% 50%, ${accent}45 0%, transparent 65%)`
+          background: `radial-gradient(ellipse at 50% 50%, ${accent}33 0%, transparent 65%)`
         }}
         aria-hidden
       />
       <div
-        className="relative overflow-hidden rounded-2xl border border-slate-200/60 bg-white/80 p-6 shadow-[0_24px_48px_-28px_rgba(15,23,42,0.18)] backdrop-blur-sm transition-transform duration-500 ease-out hover:-translate-y-1"
-        style={{ boxShadow: `0 24px 48px -28px rgba(15,23,42,0.18), 0 0 0 1px rgba(100,181,73,0.08)` }}
+        className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[0_16px_42px_-24px_rgba(15,23,42,0.2)] sm:p-6"
+        style={{ boxShadow: `0 16px 42px -24px rgba(15,23,42,0.2), 0 0 0 1px rgba(100,181,73,0.08)` }}
       >
-        <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-          <div className="h-9 flex-1 rounded-lg bg-slate-100/90" />
-          <div className="h-9 w-20 rounded-full" style={{ backgroundColor: accent }} />
+        <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">Execution program</p>
+            <p className="mt-1 text-sm font-semibold text-slate-900">Delivery control center</p>
+          </div>
+          <span
+            className="inline-flex h-8 items-center justify-center rounded-full px-3 text-[10px] font-semibold uppercase tracking-wide text-white"
+            style={{ backgroundColor: accent }}
+          >
+            Active
+          </span>
         </div>
-        <div className="mt-5 grid grid-cols-3 gap-3">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="rounded-xl bg-slate-50/90 px-3 py-4">
-              <div className="h-2 w-10 rounded bg-slate-200/90" />
-              <div className="mt-3 h-6 w-14 rounded-md bg-slate-200/80" />
+        <div className="mt-5 grid grid-cols-3 gap-2.5">
+          {[
+            { label: "Steps", value: String(processCount) },
+            { label: "Benefits", value: String(benefitsCount) },
+            { label: "Tools", value: String(toolsCount) }
+          ].map((metric) => (
+            <div key={metric.label} className="rounded-xl border border-slate-200/80 bg-slate-50/80 px-3 py-3.5">
+              <p className="text-[10px] uppercase tracking-wide text-slate-500">{metric.label}</p>
+              <p className="mt-1 text-xl font-semibold tracking-tight text-slate-900">{metric.value}</p>
             </div>
           ))}
         </div>
-        <div className="mt-5 space-y-2">
-          <div className="flex items-center justify-between gap-3">
-            <div className="h-2 flex-1 max-w-[40%] rounded bg-slate-200/80" />
-            <div className="h-2 w-10 rounded bg-slate-200/80" />
+
+        <div className="mt-5 rounded-xl border border-slate-200/80 bg-white p-3.5">
+          <div className="flex items-center justify-between text-[11px] text-slate-500">
+            <span>Program readiness</span>
+            <span className="font-semibold text-slate-700">88%</span>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full w-[88%] rounded-full transition-all duration-500" style={{ backgroundColor: accent }} />
+          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
+            <div className="h-full w-[88%] rounded-full" style={{ backgroundColor: accent }} />
           </div>
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-2">
-          <div className="h-16 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100/80" />
-          <div className="h-16 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100/80" />
+
+        <div className="mt-4 grid grid-cols-2 gap-2.5">
+          <div className="rounded-xl border border-slate-200/70 bg-slate-50/70 p-3">
+            <p className="text-[10px] uppercase tracking-wide text-slate-500">Governance</p>
+            <p className="mt-1 text-xs font-medium leading-snug text-slate-700">Compliance and approval workflow locked.</p>
+          </div>
+          <div className="rounded-xl border border-slate-200/70 bg-slate-50/70 p-3">
+            <p className="text-[10px] uppercase tracking-wide text-slate-500">Velocity</p>
+            <p className="mt-1 text-xs font-medium leading-snug text-slate-700">Execution cadence maintained across channels.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -80,11 +112,15 @@ export function ServicePremiumLayout({
   closingStatement
 }: ServicePremiumLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#FAFBFC] font-body">
+    <div className="min-h-screen bg-[#F8FAF9] font-body">
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-slate-200/50">
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_50%_-20%,rgba(100,181,73,0.12),transparent_55%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_50%_-20%,rgba(100,181,73,0.14),transparent_56%)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.05)_1px,transparent_1px)] bg-[size:72px_72px]"
           aria-hidden
         />
         <div
@@ -92,14 +128,22 @@ export function ServicePremiumLayout({
           style={{ background: `radial-gradient(circle, ${accent}33 0%, transparent 70%)` }}
           aria-hidden
         />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-24">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-24">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">{serviceLabel}</p>
-            <h1 className="mt-4 max-w-xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]">
+            <h1 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-[3.2rem] lg:leading-[1.06]">
               {title}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">{overview}</p>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:text-base lg:text-lg">{overview}</p>
+            <div className="mt-6 flex flex-wrap gap-2.5">
+              <span className="rounded-full border border-primary-200/80 bg-primary-50/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary-700">
+                Automation-first
+              </span>
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-600">
+                Enterprise delivery
+              </span>
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
                 className="inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
@@ -115,110 +159,99 @@ export function ServicePremiumLayout({
               </Link>
             </div>
           </div>
-          <HeroMockup />
+          <ProgramFrame processCount={processSteps.length} benefitsCount={benefits.length} toolsCount={tools.length} />
         </div>
       </section>
 
-      {/* Process — vertical timeline */}
-      <section id="process" className="relative scroll-mt-24 px-6 py-20 sm:py-28">
+      {/* Process */}
+      <section id="process" className="relative scroll-mt-24 px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div
           className="pointer-events-none absolute left-0 top-0 h-64 w-full bg-[radial-gradient(ellipse_60%_100%_at_0%_0%,rgba(100,181,73,0.06),transparent_50%)]"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-3xl">
+        <div className="relative mx-auto max-w-6xl">
           <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Process</h2>
-          <div className="relative mt-12 pl-8 sm:pl-10">
-            <div
-              className="absolute left-[11px] top-2 bottom-2 w-px bg-gradient-to-b from-slate-200 via-slate-200 to-transparent sm:left-[13px]"
-              aria-hidden
-            />
-            <ul className="space-y-10">
-              {processSteps.map(({ step, text }) => (
-                <li key={step} className="relative group">
-                  <span
-                    className="absolute left-0 top-1.5 flex h-6 w-6 -translate-x-[calc(0.5rem+11px)] items-center justify-center rounded-full border border-white bg-white shadow-sm transition group-hover:shadow-[0_0_0_6px_rgba(100,181,73,0.15)] sm:-translate-x-[calc(0.5rem+13px)]"
-                    style={{ boxShadow: `0 0 0 1px ${accent}40` }}
-                  >
-                    <span className="h-2 w-2 rounded-full" style={{ backgroundColor: accent }} />
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {processSteps.map(({ step, text }) => (
+              <article
+                key={step}
+                className="group rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition duration-200 ease-out hover:border-primary-200/80 hover:shadow-[0_16px_30px_-22px_rgba(15,23,42,0.4)] sm:p-5"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-primary-50 px-1.5 text-[10px] font-semibold tracking-wide text-primary-700 ring-1 ring-primary-100">
+                    {step}
                   </span>
-                  <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-400">Step {step}</p>
-                  <p className="mt-2 text-lg font-medium leading-snug text-slate-900 sm:text-xl">{text}</p>
-                </li>
-              ))}
-            </ul>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Step</p>
+                </div>
+                <p className="mt-2.5 text-base font-semibold leading-snug text-slate-900 sm:text-[17px]">{text}</p>
+                <span className="mt-3 block h-px w-full bg-gradient-to-r from-primary-100/80 via-primary-200/30 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Key Benefits — split */}
-      <section id="benefits" className="scroll-mt-24 border-t border-slate-200/40 px-6 py-20 sm:py-28">
+      {/* Key Benefits + Tools */}
+      <section id="benefits" className="scroll-mt-24 border-t border-slate-200/40 px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Key Benefits</h2>
-          <div className="mt-14 grid gap-14 lg:grid-cols-2 lg:gap-24">
+          <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-12">
             <div>
-              <p className="text-2xl font-semibold tracking-tight text-slate-900">Key Benefits</p>
-              <p className="mt-4 max-w-md text-base leading-relaxed text-slate-600">{benefitsSupportingText}</p>
+              <p className="text-2xl font-semibold tracking-tight text-slate-900">Outcomes your leadership can track</p>
+              <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-600 sm:text-base">{benefitsSupportingText}</p>
+              <ul className="mt-6 grid gap-3">
+                {benefits.map((item) => (
+                  <li key={item} className="flex gap-3 rounded-xl border border-slate-200/80 bg-white px-4 py-3.5">
+                    <span
+                      className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white"
+                      style={{ backgroundColor: accent }}
+                    >
+                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                    <span className="text-sm leading-relaxed text-slate-700 sm:text-[15px]">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="space-y-8">
-            {benefits.map((item, i) => (
-              <li
-                key={item}
-                className={`flex gap-4 transition-opacity duration-300 ${i % 2 === 1 ? "lg:pl-10" : ""}`}
-              >
-                <span
-                  className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-slate-600"
-                  style={{ backgroundColor: `${accent}18` }}
-                  aria-hidden
-                >
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </span>
-                <span className="text-lg leading-relaxed text-slate-800">{item}</span>
-              </li>
-            ))}
-            </ul>
+            <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_10px_30px_-24px_rgba(15,23,42,0.3)] sm:p-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Tools and platforms</p>
+              <div className="mt-4 flex flex-wrap gap-2.5">
+                {tools.map((name) => (
+                  <span
+                    key={name}
+                    className="rounded-full border border-slate-200 bg-slate-50/80 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-600"
+                  >
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Results */}
-      <section id="results" className="scroll-mt-24 px-6 py-20 sm:py-28">
+      <section id="results" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Results / Proof Points</h2>
-          <div className="mt-14 grid gap-12 sm:grid-cols-3 sm:gap-8">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-primary-700">Results / Proof Points</h2>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
             {results.map((line) => {
               const { big, rest } = parseResultStat(line);
               return (
-                <div key={line} className="text-center sm:text-left">
-                  <p className="text-5xl font-semibold tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">{big}</p>
-                  {rest ? <p className="mt-3 text-base font-medium leading-snug text-slate-600">{rest}</p> : null}
-                </div>
+                <article key={line} className="rounded-2xl border border-primary-100 bg-white p-5 shadow-[0_10px_30px_-20px_rgba(22,163,74,0.35)] sm:p-6">
+                  <p className="text-4xl font-semibold tracking-tight text-primary-700 sm:text-5xl lg:text-6xl">{big}</p>
+                  {rest ? <p className="mt-2 text-sm font-medium leading-snug text-primary-800/80 sm:text-base">{rest}</p> : null}
+                </article>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Tools — text wordmarks row */}
-      <section id="tools" className="scroll-mt-24 border-t border-slate-200/40 px-6 py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Tools and Platforms</h2>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:justify-between lg:gap-x-14">
-            {tools.map((name) => (
-              <span
-                key={name}
-                className="text-center text-sm font-semibold uppercase tracking-[0.12em] text-slate-400 transition hover:text-slate-700"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA */}
-      <section className="relative overflow-hidden bg-[#0B1220] px-6 py-24 sm:py-28">
+      <section className="relative overflow-hidden bg-[#0B1220] px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
         <div
           className="pointer-events-none absolute inset-0 opacity-80"
           style={{
@@ -228,11 +261,11 @@ export function ServicePremiumLayout({
         />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_80%_20%,rgba(100,181,73,0.12),transparent_50%)]" />
         <div className="relative mx-auto max-w-3xl text-center">
-          <p className="text-base leading-relaxed text-slate-300 sm:text-lg">{closingStatement}</p>
-          <h2 className="mt-10 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+          <p className="text-[15px] leading-relaxed text-slate-300 sm:text-base lg:text-lg">{closingStatement}</p>
+          <h2 className="mt-8 text-2xl font-semibold tracking-tight text-white sm:mt-10 sm:text-3xl">
             Want this service implemented for your brand?
           </h2>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
             <Link
               href="/contact"
               className="inline-flex h-12 min-w-[10rem] items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10"

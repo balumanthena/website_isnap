@@ -1,97 +1,102 @@
 import Link from "next/link";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { cn } from "@/lib/utils";
 
 const services = [
   {
+    number: "01",
     title: "Accelerated onboarding",
-    description:
-      "Structured workflows and catalog readiness so your assortment is launch-ready without internal bottlenecks or rework."
+    description: "Structured workflows and catalog readiness so your assortment is launch-ready without internal bottlenecks or rework."
   },
   {
+    number: "02",
     title: "Marketplace management",
-    description:
-      "Day-to-day operations, listings, compliance, and governance across major marketplaces—managed as a single program."
+    description: "Day-to-day operations, listings, compliance, and governance across major marketplaces managed as a single program."
   },
   {
+    number: "03",
     title: "Brand store creation",
-    description:
-      "Platform-native storefront experiences aligned to category norms, conversion patterns, and brand standards."
+    description: "Platform-native storefront experiences aligned to category norms, conversion patterns, and brand standards."
   },
   {
+    number: "04",
     title: "SEO & geo optimisation",
-    description:
-      "Search and geography-led optimisation to improve discoverability where demand and competition intersect."
+    description: "Search and geography-led optimisation to improve discoverability where demand and competition intersect."
   },
   {
+    number: "05",
     title: "Digital growth",
-    description:
-      "Evidence-led planning across acquisition, conversion, and retention—with reporting tied to commercial outcomes."
+    description: "Evidence-led planning across acquisition, conversion, and retention with reporting tied to commercial outcomes."
   },
   {
+    number: "06",
     title: "Mobile storefront development",
-    description:
-      "Performance-oriented mobile commerce experiences focused on speed, stability, and checkout clarity."
+    description: "Performance-oriented mobile commerce experiences focused on speed, stability, and checkout clarity."
   },
   {
+    number: "07",
     title: "Paid media management",
-    description:
-      "Channel execution and spend discipline with attribution visibility appropriate to your stack and partners."
+    description: "Channel execution and spend discipline with attribution visibility appropriate to your stack and partners."
   },
   {
+    number: "08",
     title: "Logistics & fulfilment",
-    description:
-      "Planning and coordination that supports reliable fulfilment, SLAs, and customer trust at scale."
+    description: "Planning and coordination that supports reliable fulfilment, SLAs, and customer trust at scale."
   },
   {
+    number: "09",
     title: "CRM & executive dashboards",
-    description:
-      "Unified visibility for commercial, operations, and leadership teams—one reference set of metrics and signals."
+    description: "Unified visibility for commercial, operations, and leadership teams with one reference set of metrics and signals."
   }
 ];
 
 export function ServicesSection() {
-  return (
-    <section className="border-b border-slate-200/80 bg-[#FAFAFA] py-24 sm:py-28">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="What We Do"
-          eyebrowClassName="text-slate-500"
-          title="End-to-end commerce operations"
-          subtitle="Structured programs spanning onboarding, marketplace execution, growth, and fulfilment—so leadership has one accountable partner."
-        />
+  const desktopSpans = ["md:col-span-4", "md:col-span-4", "md:col-span-4", "md:col-span-5", "md:col-span-3", "md:col-span-4", "md:col-span-4", "md:col-span-4", "md:col-span-4"];
 
-        <div className="mt-14 border-t border-slate-200">
+  return (
+    <section className="border-b border-slate-200/80 bg-white py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <div className="border-b border-slate-200 pb-8 sm:pb-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">What We Do</p>
+          <div className="mt-3 grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] md:items-end md:gap-10">
+            <h2 className="font-sans text-[2.2rem] font-semibold uppercase leading-[0.92] tracking-tight text-slate-900 sm:text-[3.4rem] lg:text-[4.4rem]">
+              End-to-end commerce operations
+            </h2>
+            <p className="max-w-md text-[14px] leading-relaxed text-slate-600 sm:text-[15px]">
+              Structured programs spanning onboarding, marketplace execution, growth, and fulfilment so leadership has
+              one accountable partner.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-3 sm:mt-10 md:grid-cols-12 md:gap-0">
           {services.map((service, index) => (
-            <div
+            <article
               key={service.title}
-              className="grid gap-6 border-b border-slate-200 py-8 sm:grid-cols-12 sm:gap-8 sm:py-9"
+              className={cn(
+                "group border border-slate-200 bg-white p-4 transition duration-200 ease-out hover:bg-[#F8FBF9] sm:p-5 md:min-h-[150px] md:border-l-0 md:border-t-0",
+                index < 3 && "md:border-t",
+                index % 3 === 0 && "md:border-l",
+                desktopSpans[index] ?? "md:col-span-6"
+              )}
             >
-              <div className="sm:col-span-2 sm:pt-0.5">
-                <span className="font-mono text-[11px] font-medium tabular-nums text-slate-400">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <div className="sm:col-span-10">
-                <h3 className="font-sans text-base font-semibold tracking-tight text-slate-900 sm:text-[17px]">
-                  {service.title}
-                </h3>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-[15px] sm:leading-[1.65]">
-                  {service.description}
-                </p>
-              </div>
-            </div>
+              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-slate-400">{service.number}</p>
+              <h3 className="mt-3 max-w-[16ch] font-sans text-[1.35rem] font-semibold leading-[1.02] tracking-tight text-slate-900 sm:text-[1.55rem]">
+                {service.title}
+              </h3>
+              <p className="mt-3 max-w-[34ch] text-[13px] leading-relaxed text-slate-600 sm:text-[14px]">{service.description}</p>
+            </article>
           ))}
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center gap-6 border-t border-slate-200 pt-10 sm:justify-between">
-          <p className="max-w-lg text-sm text-slate-500">
+        <div className="mt-8 grid gap-4 border-t border-slate-200 pt-7 sm:mt-10 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:gap-6 sm:pt-9">
+          <p className="max-w-xl font-sans text-[1.5rem] font-semibold leading-[1.03] tracking-tight text-slate-900 sm:text-[1.9rem]">
             Engagement models and scope are aligned to your categories, channels, and internal stakeholders.
           </p>
           <Link
             href="/services"
-            className="shrink-0 text-sm font-semibold text-slate-900 underline decoration-slate-300 underline-offset-[5px] transition hover:decoration-slate-900"
+            className="inline-flex w-fit shrink-0 items-center gap-1 text-sm font-semibold text-primary-700 transition hover:text-primary-600"
           >
-            Services overview
+            Services overview <span aria-hidden>→</span>
           </Link>
         </div>
       </div>

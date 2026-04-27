@@ -23,7 +23,8 @@ export function HeroSection() {
             <div className="max-w-[540px]">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">ISNAP FOR BRANDS</p>
             <h1 className="mt-5 font-sans text-4xl font-semibold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              Turn every sales channel into <span className="text-[#6A00FF]">scalable revenue</span>
+              Turn every sales channel into{" "}
+              <span className="text-[#15803D]">scalable revenue</span>
             </h1>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-slate-600">
               Launch, optimize, and scale across major marketplaces with AI-led execution and one operational backbone
@@ -63,25 +64,23 @@ export function HeroSection() {
             </div>
             </div>
 
-            {/* Mobile: edge-to-edge width (break out of section padding) so SVG scales to screen */}
-            <div
-              className={cn(
-                "relative mt-8 w-[calc(100%+2rem)] max-w-[100vw] min-w-0 md:hidden",
-                "-mx-4 sm:w-[calc(100%+3rem)] sm:-mx-6"
-              )}
-              aria-hidden
-            >
-              <Image
-                src={MOBILE_ART}
-                alt=""
-                width={440}
-                height={956}
-                className="mx-auto h-auto w-full max-w-full select-none object-contain object-center object-bottom"
-                style={{ maxHeight: "min(88dvh, 900px)" }}
-                sizes="100vw"
-                unoptimized
-                priority
-              />
+            {/* Mobile: scale up (~1.18×) so the art fills width — portrait SVG won’t look like a skinny column */}
+            <div className="relative left-1/2 z-0 mt-8 w-screen max-w-[100vw] -translate-x-1/2 overflow-x-hidden md:hidden">
+              <div
+                className="relative mx-auto w-full origin-top [transform:translateZ(0)_scale(1.18)] sm:[transform:translateZ(0)_scale(1.22)]"
+                style={{ aspectRatio: "440 / 956" }}
+                aria-hidden
+              >
+                <Image
+                  src={MOBILE_ART}
+                  alt=""
+                  fill
+                  className="select-none object-cover object-top"
+                  sizes="100vw"
+                  unoptimized
+                  priority
+                />
+              </div>
             </div>
           </div>
 
@@ -96,17 +95,35 @@ export function HeroSection() {
           className="relative left-1/2 z-0 mt-8 hidden w-screen max-w-[100vw] -translate-x-1/2 md:mt-12 md:block lg:mt-14"
           aria-hidden
         >
-          <div className="mx-auto w-full max-w-[min(1600px,100%)] px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto w-full max-w-none px-0">
             <Image
               src={DESKTOP_ART}
               alt=""
               width={1344}
               height={405}
-              className="h-auto w-full object-contain object-center object-bottom opacity-[0.96] saturate-[0.95]"
-              style={{ maxHeight: "min(62vh, 760px)" }}
-              sizes="(min-width: 768px) min(1600px, 100vw), 0px"
+              className="h-auto w-full min-w-full max-w-none object-contain object-bottom opacity-[0.96] saturate-[0.95]"
+              style={{ maxHeight: "min(78vh, 920px)" }}
+              sizes="(min-width: 768px) 100vw, 0px"
               unoptimized
               priority
+            />
+          </div>
+        </div>
+
+        {/* Added frame below the section, hidden on mobile */}
+        <div
+          className="relative left-1/2 z-0 mt-8 hidden w-screen max-w-[100vw] -translate-x-1/2 md:mt-12 md:block lg:mt-14"
+          aria-hidden
+        >
+          <div className="mx-auto w-full max-w-none px-0">
+            <Image
+              src="/images/Frame%20163%20(1).svg"
+              alt=""
+              width={1920}
+              height={1080}
+              className="h-auto w-full min-w-full max-w-none object-contain object-top"
+              sizes="(min-width: 768px) 100vw, 0px"
+              unoptimized
             />
           </div>
         </div>

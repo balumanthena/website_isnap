@@ -7,7 +7,6 @@ import {
   Bars3Icon,
   XMarkIcon,
   ChevronDownIcon,
-  MagnifyingGlassIcon,
   ChartBarIcon,
   CpuChipIcon,
   ShoppingBagIcon,
@@ -22,6 +21,7 @@ import { useState, type ComponentType, type SVGProps } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useScrollPosition } from "@/hooks/use-scroll-position";
+import { servicesContent } from "@/app/(marketing)/services/services-data";
 
 type ServiceItem = {
   title: string;
@@ -30,62 +30,24 @@ type ServiceItem = {
   icon: ComponentType<SVGProps<SVGSVGElement>>;
 };
 
-const services: ServiceItem[] = [
-  {
-    title: "Growth Strategy",
-    description: "AI-informed roadmap for sustained eCommerce growth.",
-    href: "/services",
-    icon: ChartBarIcon
-  },
-  {
-    title: "Performance Marketing",
-    description: "Acquire profitable customers across paid channels.",
-    href: "/services",
-    icon: ArrowTrendingUpIcon
-  },
-  {
-    title: "Conversion Optimization",
-    description: "Lift conversion with structured experiment loops.",
-    href: "/services",
-    icon: FunnelIcon
-  },
-  {
-    title: "AI Personalization",
-    description: "Dynamic recommendations tailored to intent.",
-    href: "/services",
-    icon: SparklesIcon
-  },
-  {
-    title: "Lifecycle Automation",
-    description: "Automate retention with behavior-based journeys.",
-    href: "/services",
-    icon: BoltIcon
-  },
-  {
-    title: "Marketplace Scaling",
-    description: "Accelerate sales across marketplaces and D2C.",
-    href: "/services",
-    icon: ShoppingBagIcon
-  },
-  {
-    title: "Data Engineering",
-    description: "Unify attribution and revenue intelligence.",
-    href: "/services",
-    icon: CpuChipIcon
-  },
-  {
-    title: "CRM & Loyalty",
-    description: "Increase LTV with segmented loyalty programs.",
-    href: "/services",
-    icon: UserGroupIcon
-  },
-  {
-    title: "Growth Ops",
-    description: "Operational systems that compound team output.",
-    href: "/services",
-    icon: CommandLineIcon
-  }
+const serviceIcons: ComponentType<SVGProps<SVGSVGElement>>[] = [
+  ChartBarIcon,
+  ArrowTrendingUpIcon,
+  FunnelIcon,
+  SparklesIcon,
+  BoltIcon,
+  ShoppingBagIcon,
+  CpuChipIcon,
+  UserGroupIcon,
+  CommandLineIcon
 ];
+
+const services: ServiceItem[] = servicesContent.map((service, index) => ({
+  title: service.title,
+  description: service.overview,
+  href: `/services/${service.slug}`,
+  icon: serviceIcons[index % serviceIcons.length]
+}));
 
 type SimpleLink = { label: string; href: string; description?: string };
 
@@ -285,21 +247,6 @@ export function Navbar() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-1 sm:gap-3">
-          <div className="hidden items-center gap-4 md:flex">
-            <Link href="/contact" className="text-sm font-medium text-slate-600 transition hover:text-slate-900">
-              Contact
-            </Link>
-            <Link href="/contact" className="text-sm font-medium text-slate-600 transition hover:text-slate-900">
-              Login
-            </Link>
-          </div>
-          <button
-            type="button"
-            aria-label="Search"
-            className="hidden h-9 w-9 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 md:inline-flex"
-          >
-            <MagnifyingGlassIcon className="h-5 w-5" />
-          </button>
           <div className="hidden lg:block">
             <Button size="sm" className="rounded-full px-5 font-semibold">
               Get started

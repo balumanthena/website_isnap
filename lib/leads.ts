@@ -1,6 +1,3 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-
 export const PLATFORM_OPTIONS = [
   "Amazon",
   "Flipkart",
@@ -23,10 +20,13 @@ export interface LeadInput {
 }
 
 export async function addLead(data: LeadInput) {
-  const docRef = await addDoc(collection(db, "leads"), {
-    ...data,
-    createdAt: serverTimestamp()
-  });
-
-  return docRef.id;
+  /**
+   * Firebase is intentionally disabled for now.
+   * Keep the same async contract so UI flow remains unchanged.
+   */
+  if (process.env.NODE_ENV !== "production") {
+    // eslint-disable-next-line no-console
+    console.info("[lead:capture:disabled]", data);
+  }
+  return `lead_${Date.now()}`;
 }

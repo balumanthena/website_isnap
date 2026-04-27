@@ -1,22 +1,55 @@
+"use client";
+
 /**
  * AI commerce platform hero visual — asymmetric floating cards, data-flow lines, subtle motion.
- * Straight-on layout (no perspective). Brand: #6A00FF highlights, #00C4B4 flow/progress.
+ * Straight-on layout (no perspective). Brand greens + #00C4B4 flow/progress.
  */
 
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 const cardBase =
-  "rounded-[22px] border border-[#EAEAEA] bg-white/75 shadow-[0_10px_40px_-18px_rgba(15,23,42,0.12)] backdrop-blur-[6px] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_16px_48px_-16px_rgba(106,0,255,0.12)]";
+  "rounded-[22px] border border-[#EAEAEA] bg-white/75 shadow-[0_10px_40px_-18px_rgba(15,23,42,0.12)] backdrop-blur-[6px] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_16px_48px_-16px_rgba(22,163,74,0.14)]";
 
 const badge = "inline-flex items-center rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide";
+const fulfillmentRows = [
+  { label: "Shipped", base: 72 },
+  { label: "Processing", base: 48 },
+  { label: "In transit", base: 64 }
+];
+
+function clamp(n: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, n));
+}
 
 export function HeroVisualEcosystem() {
+  const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
+
+  const handlePointerMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const nx = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const ny = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+    setMouseTilt({ x: clamp(nx, -1, 1), y: clamp(ny, -1, 1) });
+  };
+
+  const handlePointerLeave = () => setMouseTilt({ x: 0, y: 0 });
+
+  const getFulfillmentWidth = (base: number, index: number) => {
+    const verticalInfluence = index === 0 ? -1 : index === 1 ? 0.2 : 1;
+    const delta = mouseTilt.y * 8 * verticalInfluence + mouseTilt.x * 2;
+    return `${clamp(base + delta, 28, 92)}%`;
+  };
+
   return (
-    <div className="relative mx-auto w-full max-w-[520px] overflow-hidden lg:max-w-none">
+    <div
+      className="relative mx-auto w-full max-w-[520px] overflow-hidden lg:max-w-none"
+      onMouseMove={handlePointerMove}
+      onMouseLeave={handlePointerLeave}
+    >
       {/* Canvas — white so hero stays one flat surface with the page */}
       <div className="pointer-events-none absolute inset-0 -m-4 rounded-[28px] bg-white lg:-m-6" aria-hidden />
       <div
-        className="pointer-events-none absolute inset-x-0 top-1/2 h-40 -translate-y-1/2 bg-gradient-to-r from-[#6A00FF]/[0.015] via-transparent to-[#00C4B4]/[0.02] blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-1/2 h-40 -translate-y-1/2 bg-gradient-to-r from-[#22c55e]/[0.06] via-transparent to-[#00C4B4]/[0.04] blur-3xl"
         aria-hidden
       />
 
@@ -31,7 +64,7 @@ export function HeroVisualEcosystem() {
         <defs>
           <linearGradient id="flowStroke" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#00C4B4" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#6A00FF" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#15803D" stopOpacity="0.35" />
           </linearGradient>
         </defs>
         {/* Inventory → Orders */}
@@ -71,7 +104,7 @@ export function HeroVisualEcosystem() {
         <circle r="3" fill="#00C4B4">
           <animateMotion dur="5s" repeatCount="indefinite" path="M 72 108 C 130 72 200 88 268 96" />
         </circle>
-        <circle r="2.5" fill="#6A00FF" opacity="0.9">
+        <circle r="2.5" fill="#22c55e" opacity="0.9">
           <animateMotion dur="6.5s" repeatCount="indefinite" path="M 56 168 C 56 240 88 300 108 352" begin="0.5s" />
         </circle>
         <circle r="2.5" fill="#00C4B4">
@@ -85,7 +118,7 @@ export function HeroVisualEcosystem() {
         <div className={`absolute left-0 top-6 w-[min(100%,220px)] ${cardBase} z-30 p-4`}>
           <div className="flex items-center justify-between gap-2">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Inventory</span>
-            <span className={`${badge} bg-[#6A00FF]/12 text-[#6A00FF]`}>AI Active</span>
+            <span className={`${badge} bg-primary-100/90 text-primary-700`}>AI Active</span>
           </div>
           <p className="mt-3 text-sm font-semibold text-slate-900">
             Active SKUs: <span className="tabular-nums">1,248</span>
@@ -144,21 +177,15 @@ export function HeroVisualEcosystem() {
         <div className={`absolute bottom-6 right-2 z-30 w-[min(100%,260px)] ${cardBase} p-4`}>
           <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Fulfillment</span>
           <ul className="mt-3 space-y-3">
-            {[
-              { label: "Shipped", barClass: "w-[72%]" },
-              { label: "Processing", barClass: "w-[48%]" },
-              { label: "In transit", barClass: "w-[64%]" }
-            ].map((row) => (
+            {fulfillmentRows.map((row, index) => (
               <li key={row.label}>
                 <div className="flex items-center justify-between gap-2 text-[11px]">
                   <span className="font-medium text-slate-600">{row.label}</span>
                 </div>
                 <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-slate-100">
                   <div
-                    className={cn(
-                      "h-full rounded-full bg-gradient-to-r from-[#00C4B4] to-[#6A00FF]/70",
-                      row.barClass
-                    )}
+                    className="h-full rounded-full bg-gradient-to-r from-[#00C4B4] to-[#22c55e] transition-[width] duration-300 ease-out"
+                    style={{ width: getFulfillmentWidth(row.base, index) }}
                   />
                 </div>
               </li>
@@ -172,7 +199,7 @@ export function HeroVisualEcosystem() {
         <div className={`${cardBase} p-4`}>
           <div className="flex items-center justify-between gap-2">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Inventory</span>
-            <span className={`${badge} bg-[#6A00FF]/12 text-[#6A00FF]`}>AI Active</span>
+            <span className={`${badge} bg-primary-100/90 text-primary-700`}>AI Active</span>
           </div>
           <p className="mt-3 text-sm font-semibold text-slate-900">
             Active SKUs: <span className="tabular-nums">1,248</span>
@@ -212,22 +239,13 @@ export function HeroVisualEcosystem() {
         <div className={`${cardBase} p-4`}>
           <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Fulfillment</span>
           <ul className="mt-3 space-y-3">
-            {[
-              { label: "Shipped", barClass: "w-[72%]" },
-              { label: "Processing", barClass: "w-[48%]" },
-              { label: "In transit", barClass: "w-[64%]" }
-            ].map((row) => (
+            {fulfillmentRows.map((row) => (
               <li key={row.label}>
                 <div className="flex items-center justify-between text-[11px]">
                   <span className="font-medium text-slate-600">{row.label}</span>
                 </div>
                 <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-slate-100">
-                  <div
-                    className={cn(
-                      "h-full rounded-full bg-gradient-to-r from-[#00C4B4] to-[#6A00FF]/70",
-                      row.barClass
-                    )}
-                  />
+                  <div className="h-full rounded-full bg-gradient-to-r from-[#00C4B4] to-[#22c55e]" style={{ width: `${row.base}%` }} />
                 </div>
               </li>
             ))}

@@ -6,13 +6,14 @@ import { useEffect, useId, useRef, type ReactNode } from "react";
 
 const PRIMARY = "#64b549";
 const TEAL = "#00C4B4";
-const VIOLET = "#6A00FF";
+/** Deep green accent (replaces legacy violet) */
+const ACCENT_DEEP = "#15803D";
 
 const channels = [
   { name: "Amazon", sub: "Marketplace", color: "#FF9900", icon: "A", orders: "2.4k" },
   { name: "Shopify", sub: "D2C Store", color: "#96BF47", icon: "S", orders: "1.1k" },
   { name: "Instagram", sub: "Social shop", color: "#E1306C", icon: "I", orders: "842" },
-  { name: "Campaign", sub: "Spring drop", color: "#8B5CF6", icon: "C", orders: "Live" },
+  { name: "Campaign", sub: "Spring drop", color: "#64b549", icon: "C", orders: "Live" },
 ];
 
 const products = [
@@ -122,24 +123,24 @@ export function ProductIntelligenceSection() {
     >
       {/* noise + mesh */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-soft-light"
+        className="pointer-events-none absolute inset-0 opacity-[0.2] mix-blend-soft-light"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
         }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.07)_1px,transparent_1px)] bg-[size:72px_72px]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.045)_1px,transparent_1px)] bg-[size:88px_88px]"
         aria-hidden
       />
 
       {/* faint arcs across section */}
-      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.45]" aria-hidden>
+      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.28]" aria-hidden>
         <defs>
           <linearGradient id={gid("arcGrad")} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor={PRIMARY} stopOpacity="0" />
             <stop offset="50%" stopColor={TEAL} stopOpacity="0.2" />
-            <stop offset="100%" stopColor={VIOLET} stopOpacity="0" />
+            <stop offset="100%" stopColor={ACCENT_DEEP} stopOpacity="0" />
           </linearGradient>
         </defs>
         <path
@@ -159,10 +160,10 @@ export function ProductIntelligenceSection() {
         />
       </svg>
 
-      <div className="pointer-events-none absolute left-[8%] top-[20%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(100,181,73,0.07),transparent_65%)] blur-2xl" aria-hidden />
-      <div className="pointer-events-none absolute right-[5%] top-[35%] h-[380px] w-[380px] rounded-full bg-[radial-gradient(circle_at_center,rgba(106,0,255,0.05),transparent_60%)] blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute left-[10%] top-[18%] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_center,rgba(100,181,73,0.06),transparent_62%)] blur-2xl" aria-hidden />
+      <div className="pointer-events-none absolute right-[6%] top-[34%] h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle_at_center,rgba(22,163,74,0.06),transparent_62%)] blur-3xl" aria-hidden />
 
-      <div className="relative mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8">
         {/* asymmetric header — not dead center */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
@@ -185,10 +186,10 @@ export function ProductIntelligenceSection() {
           variants={stagger}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="mt-14 grid w-full grid-cols-1 gap-8 lg:mt-16 lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)_minmax(0,260px)] lg:items-start lg:gap-8 xl:gap-10"
+          className="mt-14 grid w-full grid-cols-1 gap-8 lg:mt-16 lg:grid-cols-[minmax(0,220px)_minmax(0,1fr)_minmax(0,240px)] lg:items-start lg:gap-10"
         >
           {/* ── LEFT: floating channels ── */}
-          <motion.div variants={fadeUp} className="relative hidden min-h-[500px] lg:block">
+          <motion.div variants={fadeUp} className="relative hidden min-h-[420px] lg:block">
             {channels.map((ch, i) => (
               <motion.div
                 key={ch.name}
@@ -263,7 +264,7 @@ export function ProductIntelligenceSection() {
                   background: `linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(240,250,240,0.9) 45%, rgba(255,255,255,0.88) 100%)`,
                 }}
               >
-                <div className="absolute inset-0 rounded-[23px] bg-gradient-to-br from-[#64b549]/[0.12] via-transparent to-[#6A00FF]/[0.06]" />
+                <div className="absolute inset-0 rounded-[23px] bg-gradient-to-br from-[#64b549]/[0.12] via-transparent to-[#15803D]/[0.08]" />
                 <div className="relative rounded-[22px] border border-white/60 bg-white/40 p-5 backdrop-blur-md sm:p-6">
                   <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
                     <div>
@@ -285,7 +286,7 @@ export function ProductIntelligenceSection() {
                   </div>
 
                   {/* 2×3 grid — first cell is visual anchor; overlay detail floats above */}
-                  <div className="relative min-h-[340px] sm:min-h-[380px]">
+                  <div className="relative min-h-[300px] sm:min-h-[330px]">
                     <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3">
                       {products.map((p, i) => (
                         <motion.div
@@ -335,7 +336,7 @@ export function ProductIntelligenceSection() {
                       transition={{ delay: 0.45, duration: 0.55, ease: "easeOut" }}
                       className={cn(
                         card,
-                        "absolute -right-1 bottom-2 z-20 w-[min(92%,270px)] p-4 sm:-right-2 sm:bottom-4 sm:w-[290px]",
+                        "absolute right-2 bottom-3 z-20 w-[min(92%,260px)] p-4 sm:right-3 sm:bottom-4 sm:w-[280px]",
                         "border-[#64b549]/15 shadow-[0_24px_60px_-16px_rgba(100,181,73,0.25)]"
                       )}
                       style={{
@@ -392,7 +393,7 @@ export function ProductIntelligenceSection() {
           </motion.div>
 
           {/* ── RIGHT: fulfillment + abstract flow ── */}
-          <motion.div variants={fadeUp} className="relative hidden min-h-[480px] lg:block">
+          <motion.div variants={fadeUp} className="relative hidden min-h-[420px] lg:block">
             <svg
               className="pointer-events-none absolute left-[-8px] top-12 bottom-12 w-14 overflow-visible"
               viewBox="0 0 56 360"
@@ -402,7 +403,7 @@ export function ProductIntelligenceSection() {
               <defs>
                 <linearGradient id={gid("flowR")} x1="1" y1="0" x2="0" y2="0">
                   <stop offset="0%" stopColor={TEAL} stopOpacity="0.55" />
-                  <stop offset="100%" stopColor={VIOLET} stopOpacity="0.25" />
+                  <stop offset="100%" stopColor={ACCENT_DEEP} stopOpacity="0.25" />
                 </linearGradient>
               </defs>
               {[48, 140, 232].map((y, i) => (
@@ -496,9 +497,9 @@ export function ProductIntelligenceSection() {
                 />
                 <circle cx="100" cy="40" r="4" fill={PRIMARY} opacity="0.9" />
                 <circle cx="40" cy="52" r="3" fill={TEAL} opacity="0.85" />
-                <circle cx="170" cy="28" r="3" fill={VIOLET} opacity="0.7" />
+                <circle cx="170" cy="28" r="3" fill={ACCENT_DEEP} opacity="0.7" />
                 <line x1="100" y1="40" x2="40" y2="52" stroke={TEAL} strokeWidth="0.8" opacity="0.35" />
-                <line x1="100" y1="40" x2="170" y2="28" stroke={VIOLET} strokeWidth="0.8" opacity="0.35" />
+                <line x1="100" y1="40" x2="170" y2="28" stroke={ACCENT_DEEP} strokeWidth="0.8" opacity="0.35" />
               </svg>
             </div>
           </motion.div>
