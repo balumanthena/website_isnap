@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import localFont from "next/font/local";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import { Inter, Space_Grotesk } from "next/font/google";
+
 import "../styles/globals.css";
 
 const inter = Inter({
@@ -11,16 +9,16 @@ const inter = Inter({
   display: "swap"
 });
 
-const kuenstler = localFont({
-  src: "../public/fonts/Kuenstler 480 BT W08 Roman.ttf",
-  variable: "--font-kuenstler",
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
   display: "swap"
 });
 
 export const metadata: Metadata = {
-  title: "ISNAP | AI-Powered eCommerce Growth Partner",
+  title: "ISNAP | Enterprise AI Infrastructure",
   description:
-    "ISNAP helps eCommerce brands unlock measurable growth through AI-driven strategy, experimentation, and automation.",
+    "ISNAP helps multi-million dollar eCommerce brands unlock scale through AI-driven operational intelligence.",
   metadataBase: new URL("https://isnap.ai")
 };
 
@@ -28,13 +26,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${kuenstler.variable} min-h-screen bg-white font-sans text-slate-900 antialiased`}
+        className={`${inter.variable} ${spaceGrotesk.variable} min-h-screen bg-enterprise-bg font-sans text-enterprise-text antialiased selection:bg-enterprise-lime/30 selection:text-enterprise-text`}
       >
-        <div className="flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <div className="institutional-bg" />
+        {children}
       </body>
     </html>
   );

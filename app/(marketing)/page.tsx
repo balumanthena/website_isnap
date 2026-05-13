@@ -4,19 +4,21 @@ import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { HumanTrustSection } from "@/components/sections/HumanTrustSection";
 import { IndustriesSection } from "@/components/sections/IndustriesSection";
 import { ScrollFadeInSection } from "@/components/sections/ScrollFadeInSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
-import { SpotlightGridSection } from "@/components/sections/SpotlightGridSection";
 import { ProductIntelligenceSection } from "@/components/sections/ProductIntelligenceSection";
-import SmartCommerceShowcase from "@/components/sections/SmartCommerceShowcase";
+import { SmartCommerceShowcase } from "@/components/sections/SmartCommerceShowcase";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
-import StripeSessionsBanner from "@/components/sections/StripeSessionsBanner";
+import { WhatWeDoSection } from "@/components/sections/WhatWeDoSection";
+import { EngagementProfileSection } from "@/components/sections/EngagementProfileSection";
 
 export default function HomePage() {
   return (
     <>
       <ScrollFadeInSection>
         <HeroSection />
+      </ScrollFadeInSection>
+      <ScrollFadeInSection>
+        <WhatWeDoSection />
       </ScrollFadeInSection>
       <ScrollFadeInSection>
         <SmartCommerceShowcase />
@@ -28,10 +30,10 @@ export default function HomePage() {
         <HowItWorksSection />
       </ScrollFadeInSection>
       <ScrollFadeInSection>
-        <ServicesSection />
+        <IndustriesSection />
       </ScrollFadeInSection>
       <ScrollFadeInSection>
-        <IndustriesSection />
+        <EngagementProfileSection />
       </ScrollFadeInSection>
       <ScrollFadeInSection>
         <StatsSection />
@@ -41,12 +43,6 @@ export default function HomePage() {
       </ScrollFadeInSection>
       <ScrollFadeInSection>
         <TestimonialsSection />
-      </ScrollFadeInSection>
-      <ScrollFadeInSection>
-        <SpotlightGridSection />
-      </ScrollFadeInSection>
-      <ScrollFadeInSection>
-        <StripeSessionsBanner />
       </ScrollFadeInSection>
       <ScrollFadeInSection>
         <CTASection />

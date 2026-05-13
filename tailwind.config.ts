@@ -9,58 +9,43 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: "#F0FDF4",
-          100: "#DCFCE7",
-          200: "#BBF7D0",
-          500: "#22C55E",
-          600: "#16A34A",
-          700: "#15803D",
-          900: "#14532D"
-        },
-        slate: {
-          50: "#f8fafc",
-          100: "#f1f5f9",
-          200: "#e2e8f0",
-          300: "#cbd5e1",
-          400: "#94a3b8",
-          500: "#64748b",
-          600: "#475569",
-          700: "#334155",
-          800: "#1e293b",
-          900: "#0f172a"
+        enterprise: {
+          text: "#0B1020",
+          "text-muted": "#5B6475",
+          bg: "#F7F8F4",
+          "bg-alt": "#F4F5F1",
+          surface: "rgba(255,255,255,0.82)", // 0.82 as requested
+          green: "#73D978", // Specific green requested
+          "green-deep": "#4CB86A",
+          border: "rgba(15,23,42,.06)", // 0.06 border
+          shadow: "rgba(15,23,42,.04)", // 0.04 shadow
         }
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
-        heading: ["var(--font-kuenstler)", "Kuenstler 480 BT Roman", "Kuenstler 480 BT", "Kuenstler", "serif"],
-        body: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"]
+        display: ["var(--font-satoshi)", "var(--font-inter)", "system-ui", "sans-serif"],
       },
-      spacing: {
-        1: "0.25rem",
-        2: "0.5rem",
-        3: "0.75rem",
-        4: "1rem",
-        6: "1.5rem",
-        8: "2rem",
-        12: "3rem",
-        16: "4rem",
-        20: "5rem",
-        24: "6rem",
-        18: "4.5rem",
-        22: "5.5rem",
-        30: "7.5rem"
+      boxShadow: {
+        premium: "0 8px 20px rgba(15,23,42,.04)",
+        "enterprise-card": "0 8px 20px rgba(15,23,42,.04)",
+        "enterprise-nav": "0 4px 16px rgba(15,23,42,.02)",
+      },
+      letterSpacing: {
+        hero: "-0.05em",
+        institutional: "0.08em",
+      },
+      lineHeight: {
+        hero: "0.94", // 0.94 as requested
       },
       borderRadius: {
-        md: "0.5rem",
-        xl: "0.75rem",
-        pill: "1.25rem",
-        "2xl": "1.125rem",
-        "3xl": "1.5rem"
+        enterprise: "16px", // 16px maximum as requested
+        button: "14px",
       }
     }
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/typography'),
+  ]
 };
 
 export default config;

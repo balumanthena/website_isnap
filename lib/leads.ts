@@ -19,14 +19,25 @@ export interface LeadInput {
   source: "contact_page";
 }
 
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
 export async function addLead(data: LeadInput) {
-  /**
-   * Firebase is intentionally disabled for now.
-   * Keep the same async contract so UI flow remains unchanged.
-   */
-  if (process.env.NODE_ENV !== "production") {
+  try {
+    const docRef = await addDoc(collection(db, "leads"), {
+      ...data,
+      createdAt: serverTimestamp(),
+    });
+    
+    if (process.env.NODE_ENV !== "production") {
+      // eslint-disable-next-line no-console
+      console.info("[lead:captured]", docRef.id);
+    }
+    
+    return docRef.id;
+  } catch (error) {
     // eslint-disable-next-line no-console
-    console.info("[lead:capture:disabled]", data);
+    console.error("[lead:error]", error);
+    throw error;
   }
-  return `lead_${Date.now()}`;
 }

@@ -1,255 +1,135 @@
 "use client";
 
-/**
- * AI commerce platform hero visual — asymmetric floating cards, data-flow lines, subtle motion.
- * Straight-on layout (no perspective). Brand greens + #00C4B4 flow/progress.
- */
-
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-
-const cardBase =
-  "rounded-[22px] border border-[#EAEAEA] bg-white/75 shadow-[0_10px_40px_-18px_rgba(15,23,42,0.12)] backdrop-blur-[6px] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_16px_48px_-16px_rgba(22,163,74,0.14)]";
-
-const badge = "inline-flex items-center rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide";
-const fulfillmentRows = [
-  { label: "Shipped", base: 72 },
-  { label: "Processing", base: 48 },
-  { label: "In transit", base: 64 }
-];
-
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, n));
-}
 
 export function HeroVisualEcosystem() {
-  const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
-
-  const handlePointerMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const nx = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-    const ny = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    setMouseTilt({ x: clamp(nx, -1, 1), y: clamp(ny, -1, 1) });
-  };
-
-  const handlePointerLeave = () => setMouseTilt({ x: 0, y: 0 });
-
-  const getFulfillmentWidth = (base: number, index: number) => {
-    const verticalInfluence = index === 0 ? -1 : index === 1 ? 0.2 : 1;
-    const delta = mouseTilt.y * 8 * verticalInfluence + mouseTilt.x * 2;
-    return `${clamp(base + delta, 28, 92)}%`;
-  };
-
   return (
-    <div
-      className="relative mx-auto w-full max-w-[520px] overflow-hidden lg:max-w-none"
-      onMouseMove={handlePointerMove}
-      onMouseLeave={handlePointerLeave}
-    >
-      {/* Canvas — white so hero stays one flat surface with the page */}
-      <div className="pointer-events-none absolute inset-0 -m-4 rounded-[28px] bg-white lg:-m-6" aria-hidden />
-      <div
-        className="pointer-events-none absolute inset-x-0 top-1/2 h-40 -translate-y-1/2 bg-gradient-to-r from-[#22c55e]/[0.06] via-transparent to-[#00C4B4]/[0.04] blur-3xl"
-        aria-hidden
-      />
-
-      {/* Connection layer — behind cards */}
-      <svg
-        className="pointer-events-none absolute left-1/2 top-[42%] z-0 h-[min(100%,380px)] w-full max-w-[440px] -translate-x-1/2 -translate-y-1/2 overflow-visible md:h-[400px] md:max-w-[460px] lg:top-[45%] lg:h-[420px] lg:max-w-[480px]"
-        viewBox="0 0 400 480"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden
-      >
-        <defs>
-          <linearGradient id="flowStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00C4B4" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#15803D" stopOpacity="0.35" />
-          </linearGradient>
-        </defs>
-        {/* Inventory → Orders */}
-        <path
-          id="path-io"
-          d="M 72 108 C 130 72 200 88 268 96"
-          stroke="url(#flowStroke)"
-          strokeWidth="1"
-          strokeOpacity="0.55"
-        />
-        {/* Inventory → Channel */}
-        <path
-          id="path-ic"
-          d="M 56 168 C 56 240 88 300 108 352"
-          stroke="url(#flowStroke)"
-          strokeWidth="1"
-          strokeOpacity="0.45"
-        />
-        {/* Orders → Fulfillment */}
-        <path
-          id="path-of"
-          d="M 292 168 L 300 248 C 302 300 268 340 220 368"
-          stroke="url(#flowStroke)"
-          strokeWidth="1"
-          strokeOpacity="0.5"
-        />
-        {/* Channel → Fulfillment */}
-        <path
-          id="path-cf"
-          d="M 148 392 C 180 380 210 372 248 368"
-          stroke="url(#flowStroke)"
-          strokeWidth="1"
-          strokeOpacity="0.4"
-        />
-
-        {/* Moving dots — AI automation */}
-        <circle r="3" fill="#00C4B4">
-          <animateMotion dur="5s" repeatCount="indefinite" path="M 72 108 C 130 72 200 88 268 96" />
-        </circle>
-        <circle r="2.5" fill="#22c55e" opacity="0.9">
-          <animateMotion dur="6.5s" repeatCount="indefinite" path="M 56 168 C 56 240 88 300 108 352" begin="0.5s" />
-        </circle>
-        <circle r="2.5" fill="#00C4B4">
-          <animateMotion dur="5.5s" repeatCount="indefinite" path="M 292 168 L 300 248 C 302 300 268 340 220 368" begin="1s" />
-        </circle>
-      </svg>
-
-      {/* Desktop: asymmetric float */}
-      <div className="relative z-10 hidden min-h-[420px] md:block md:min-h-[440px] lg:min-h-[480px]">
-        {/* Inventory */}
-        <div className={`absolute left-0 top-6 w-[min(100%,220px)] ${cardBase} z-30 p-4`}>
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Inventory</span>
-            <span className={`${badge} bg-primary-100/90 text-primary-700`}>AI Active</span>
+    <div className="relative w-full h-full bg-white rounded-xl overflow-hidden shadow-premium">
+      {/* Dashboard Top Header */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-enterprise-border bg-enterprise-bg/40">
+        <div className="flex items-center gap-4">
+          <div className="flex gap-1.5">
+            {[1, 2, 3].map(i => <div key={i} className="h-2 w-2 rounded-full bg-enterprise-border" />)}
           </div>
-          <p className="mt-3 text-sm font-semibold text-slate-900">
-            Active SKUs: <span className="tabular-nums">1,248</span>
-          </p>
-          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full w-[78%] rounded-full bg-[#00C4B4]/85" />
-          </div>
+          <div className="h-4 w-px bg-enterprise-border" />
+          <span className="text-[10px] font-bold text-enterprise-text-muted uppercase tracking-widest">Global Terminal</span>
         </div>
-
-        {/* Orders + sparkline */}
-        <div className={`absolute right-0 top-0 z-40 w-[min(100%,230px)] ${cardBase} p-4`}>
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Orders</span>
-            <span className={`${badge} bg-[#00C4B4]/12 text-[#00A896]`}>Optimizing</span>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-enterprise-green" />
+            <span className="text-[9px] font-bold text-enterprise-green uppercase">Sync: Active</span>
           </div>
-          <p className="mt-3 text-sm font-semibold text-slate-900">
-            Orders processed: <span className="tabular-nums">312</span>
-          </p>
-          <svg className="mt-3 h-10 w-full" viewBox="0 0 120 36" preserveAspectRatio="none" aria-hidden>
-            <path
-              d="M0 28 L18 22 L36 26 L54 14 L72 18 L90 8 L108 12 L120 6"
-              fill="none"
-              stroke="#00C4B4"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              opacity="0.85"
-            />
-            <path
-              d="M0 28 L18 22 L36 26 L54 14 L72 18 L90 8 L108 12 L120 6 L120 36 L0 36 Z"
-              fill="url(#isnapHeroSparkFill)"
-              opacity="0.12"
-            />
-            <defs>
-              <linearGradient id="isnapHeroSparkFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#00C4B4" />
-                <stop offset="100%" stopColor="#00C4B4" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-
-        {/* Channel */}
-        <div className={`absolute bottom-28 left-4 z-20 w-[min(100%,210px)] ${cardBase} p-4`}>
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Channels</span>
-          <p className="mt-3 text-sm font-semibold text-slate-900">
-            Live Channels: <span className="tabular-nums">5</span>
-          </p>
-          <div className="mt-3 flex items-center justify-between gap-2">
-            <span className="text-xs font-medium text-slate-600">Status</span>
-            <span className="rounded-md bg-[#00C4B4]/10 px-2 py-1 text-[11px] font-semibold text-[#009688]">Synced</span>
-          </div>
-        </div>
-
-        {/* Fulfillment */}
-        <div className={`absolute bottom-6 right-2 z-30 w-[min(100%,260px)] ${cardBase} p-4`}>
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Fulfillment</span>
-          <ul className="mt-3 space-y-3">
-            {fulfillmentRows.map((row, index) => (
-              <li key={row.label}>
-                <div className="flex items-center justify-between gap-2 text-[11px]">
-                  <span className="font-medium text-slate-600">{row.label}</span>
-                </div>
-                <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-slate-100">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-[#00C4B4] to-[#22c55e] transition-[width] duration-300 ease-out"
-                    style={{ width: getFulfillmentWidth(row.base, index) }}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
 
-      {/* Mobile: stacked, same cards, no overlapping */}
-      <div className="relative z-10 flex flex-col gap-4 md:hidden">
-        <div className={`${cardBase} p-4`}>
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Inventory</span>
-            <span className={`${badge} bg-primary-100/90 text-primary-700`}>AI Active</span>
+      <div className="p-6 grid grid-cols-1 md:grid-cols-12 gap-6">
+        {/* Left Col: System Integrity Nodes */}
+        <div className="md:col-span-4 space-y-6">
+          <div className="p-5 rounded-xl border border-enterprise-border bg-white shadow-sm">
+            <div className="flex items-center justify-between mb-8">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-enterprise-text-muted">Node Status</span>
+              <span className="text-[9px] font-mono font-bold text-enterprise-text opacity-40">UTC-04</span>
+            </div>
+            <div className="grid grid-cols-4 gap-2">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div key={i} className={cn(
+                  "h-5 rounded-sm transition-all",
+                  i === 4 || i === 9 ? "bg-enterprise-green/40" : "bg-enterprise-bg"
+                )} />
+              ))}
+            </div>
           </div>
-          <p className="mt-3 text-sm font-semibold text-slate-900">
-            Active SKUs: <span className="tabular-nums">1,248</span>
-          </p>
-          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full w-[78%] rounded-full bg-[#00C4B4]/85" />
-          </div>
-        </div>
-        <div className={`${cardBase} p-4`}>
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Orders</span>
-            <span className={`${badge} bg-[#00C4B4]/12 text-[#00A896]`}>Optimizing</span>
-          </div>
-          <p className="mt-3 text-sm font-semibold text-slate-900">
-            Orders processed: <span className="tabular-nums">312</span>
-          </p>
-          <svg className="mt-3 h-10 w-full" viewBox="0 0 120 36" preserveAspectRatio="none" aria-hidden>
-            <path
-              d="M0 28 L18 22 L36 26 L54 14 L72 18 L90 8 L108 12 L120 6"
-              fill="none"
-              stroke="#00C4B4"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
-        <div className={`${cardBase} p-4`}>
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Channels</span>
-          <p className="mt-3 text-sm font-semibold text-slate-900">
-            Live Channels: <span className="tabular-nums">5</span>
-          </p>
-          <div className="mt-3 flex items-center justify-between">
-            <span className="text-xs text-slate-600">Status</span>
-            <span className="rounded-md bg-[#00C4B4]/10 px-2 py-1 text-[11px] font-semibold text-[#009688]">Synced</span>
-          </div>
-        </div>
-        <div className={`${cardBase} p-4`}>
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Fulfillment</span>
-          <ul className="mt-3 space-y-3">
-            {fulfillmentRows.map((row) => (
-              <li key={row.label}>
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="font-medium text-slate-600">{row.label}</span>
+
+          <div className="p-5 rounded-xl border border-enterprise-border bg-enterprise-bg/40">
+            <p className="text-[9px] font-bold uppercase tracking-widest text-enterprise-text-muted mb-4">Metric Distribution</p>
+            <div className="space-y-3">
+              {[
+                { l: "Platform", v: 84 },
+                { l: "Execution", v: 62 },
+                { l: "Network", v: 91 }
+              ].map(bar => (
+                <div key={bar.l}>
+                  <div className="flex justify-between mb-1.5">
+                    <span className="text-[9px] font-bold text-enterprise-text">{bar.l}</span>
+                    <span className="text-[9px] font-mono text-enterprise-text-muted">{bar.v}%</span>
+                  </div>
+                  <div className="h-0.5 w-full bg-enterprise-border rounded-full overflow-hidden">
+                    <div className="h-full bg-enterprise-text" style={{ width: `${bar.v}%` }} />
+                  </div>
                 </div>
-                <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-slate-100">
-                  <div className="h-full rounded-full bg-gradient-to-r from-[#00C4B4] to-[#22c55e]" style={{ width: `${row.base}%` }} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Center/Right: Multi-Node Analytics */}
+        <div className="md:col-span-8">
+          <div className="h-full p-6 rounded-xl border border-enterprise-border bg-white flex flex-col">
+            <div className="flex items-center justify-between mb-10 pb-6 border-b border-enterprise-border">
+              <div>
+                <p className="text-[9px] font-bold text-enterprise-text-muted uppercase tracking-widest mb-1">Operational Revenue</p>
+                <p className="text-3xl font-bold tracking-hero text-enterprise-text">₹12.4M</p>
+              </div>
+              <div className="text-right">
+                <p className="text-[9px] font-bold text-enterprise-green uppercase tracking-widest mb-1">+14.2%</p>
+                <p className="text-[9px] font-bold text-enterprise-text-muted uppercase tracking-widest">Growth Vector</p>
+              </div>
+            </div>
+
+            <div className="flex-1 min-h-[160px] relative mt-4">
+              {/* Institutional Graph Lines */}
+              <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
+                <path
+                  d="M0 140 L 40 130 L 80 150 L 120 110 L 160 120 L 200 90 L 240 100 L 280 60 L 320 80 L 360 40 L 400 50"
+                  fill="none"
+                  stroke="#0B1020"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  opacity="0.15"
+                />
+                <path
+                  d="M0 140 L 40 130 L 80 150 L 120 110 L 160 120 L 200 90 L 240 100 L 280 60 L 320 80 L 360 40 L 400 50"
+                  fill="none"
+                  stroke="#7BE07B"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  className="animate-[draw_2s_ease-out]"
+                />
+              </svg>
+              
+              <div className="absolute inset-0 grid grid-cols-5 pointer-events-none">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className="h-full border-r border-enterprise-border last:border-0" />
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 grid grid-cols-3 gap-8 pt-6 border-t border-enterprise-border">
+              {[
+                { l: "Active SKUs", v: "1,248" },
+                { l: "Order Velocity", v: "28/min" },
+                { l: "SLA Status", v: "99.9%" }
+              ].map(stat => (
+                <div key={stat.l}>
+                  <p className="text-[8px] font-bold text-enterprise-text-muted uppercase tracking-widest mb-1">{stat.l}</p>
+                  <p className="text-sm font-bold text-enterprise-text">{stat.v}</p>
                 </div>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-6 py-4 bg-enterprise-bg/20 border-t border-enterprise-border flex items-center justify-between">
+        <div className="flex gap-6">
+          {["Inventory", "Distribution", "Analytics", "Settlement"].map(tab => (
+            <span key={tab} className="text-[9px] font-bold text-enterprise-text/40 uppercase tracking-widest cursor-default hover:text-enterprise-text transition-colors">
+              {tab}
+            </span>
+          ))}
+        </div>
+        <div className="h-5 w-5 rounded bg-enterprise-text flex items-center justify-center">
+          <div className="h-1.5 w-1.5 rounded-full bg-enterprise-green shadow-[0_0_8px_rgba(123,224,123,0.8)]" />
         </div>
       </div>
     </div>

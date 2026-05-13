@@ -6,6 +6,11 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow write: if true; // TODO: Change to `request.auth != null` after adding Firebase Auth
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

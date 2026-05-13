@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -27,156 +29,119 @@ function DarkArrowCircle() {
 
 export function SpotlightGridSection() {
   return (
-    <section className="bg-[#F4F6F8] py-10 sm:py-14 md:py-16">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-4 lg:grid-cols-2 lg:grid-rows-2 lg:gap-5">
-          {/* Large primary card */}
+    <section className="relative overflow-hidden bg-enterprise-bg section-spacing">
+      <div className="noise-overlay" />
+      <div className="absolute inset-0 grid-subtle opacity-30" />
+      
+      <div className="relative mx-auto max-w-[1440px] px-6 lg:px-12">
+        <div className="grid gap-8 lg:grid-cols-2 lg:grid-rows-2 lg:gap-10">
+          {/* Primary Enterprise Feature Card */}
           <Link
             href="/contact"
-            className={cn(
-              "group relative flex min-h-[22rem] flex-col overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-primary-600 via-primary-600 to-[#0E8A82] p-7 text-left shadow-lg shadow-primary-900/10 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:min-h-[26rem] sm:p-8 lg:row-span-2 lg:min-h-0",
-              "hover:-translate-y-1.5 hover:shadow-[0_30px_50px_-24px_rgba(6,78,59,0.62)]"
-            )}
+            className="group relative flex flex-col overflow-hidden enterprise-card bg-enterprise-text p-10 lg:row-span-2 min-h-[600px]"
           >
-            <div className="pointer-events-none absolute -right-16 top-1/4 h-64 w-64 rounded-full bg-white/10 blur-3xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1" />
-            <div className="pointer-events-none absolute -bottom-20 -left-10 h-72 w-72 rounded-full bg-primary-900/20 blur-3xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-x-1 group-hover:translate-y-1" />
-            <div
-              className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100"
-              aria-hidden
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-300/10 via-transparent to-primary-200/10" />
-            </div>
-
-            <p className="relative text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5">
-              ISNAP Launch
-            </p>
-            <h2 className="relative mt-3 max-w-[16ch] font-sans text-2xl font-bold leading-tight tracking-tight text-white transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 sm:text-3xl md:text-4xl">
-              Start selling on marketplaces with confidence
-            </h2>
-            <p className="relative mt-4 max-w-md text-sm leading-relaxed text-white/88 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 sm:text-base">
-              AI-assisted cataloging, listing quality, and channel setup—so your brand goes live faster with less manual
-              rework.
-            </p>
-
-            <div className="relative mt-auto flex items-end justify-between gap-2 pt-2">
-              <div className="relative -ml-10 w-[260%] sm:-ml-12 sm:w-[235%]">
-                <div className="relative aspect-[16/9] w-full">
-                  <Image
-                    src="/images/ChatGPT Image Apr 10, 2026, 12_43_51 PM.png"
-                    alt="ISNAP commerce visual"
-                    fill
-                    sizes="(min-width: 1024px) 1100px, (min-width: 640px) 900px, 210vw"
-                    className="object-cover object-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
-                  />
-                </div>
+            <div className="absolute inset-0 ambient-gradient opacity-20" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 rounded-full border border-enterprise-lime/20 bg-enterprise-lime/5 px-3 py-1">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-enterprise-green">Operational Excellence</p>
               </div>
-              <DarkArrowCircle />
+              <h2 className="mt-8 text-5xl font-bold tracking-tight text-white leading-[0.95]">
+                Start selling with <span className="text-enterprise-green">operational confidence.</span>
+              </h2>
+              <p className="mt-8 text-lg text-white/60 leading-relaxed max-w-md">
+                AI-assisted cataloging and automated channel setup—engineered to reduce manual rework and accelerate global deployment.
+              </p>
+            </div>
+            
+            <div className="mt-auto relative">
+              <div className="relative aspect-[16/10] w-[140%] -ml-[20%] overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl">
+                <Image
+                  src="/images/ChatGPT Image Apr 10, 2026, 12_43_51 PM.png"
+                  alt="ISNAP commerce visual"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-enterprise-text to-transparent opacity-40" />
+              </div>
+              <div className="absolute bottom-6 right-6">
+                <DarkArrowCircle />
+              </div>
             </div>
           </Link>
 
-          {/* Top right */}
+          {/* Secondary Features */}
           <Link
             href="/services"
-            className="group flex min-h-[12.5rem] flex-col justify-between rounded-[1.75rem] border border-slate-200/80 bg-white p-6 shadow-sm transition hover:border-primary-200 hover:shadow-md sm:p-7"
+            className="group enterprise-card p-10 flex flex-col justify-between bg-white/60 hover:bg-white transition-all duration-500 hover:-translate-y-2"
           >
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-600">ISNAP Scale</p>
-              <h2 className="mt-3 max-w-[18ch] font-sans text-xl font-bold leading-snug tracking-tight text-slate-900 sm:text-2xl">
-                Grow revenue with continuous optimization
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-enterprise-green mb-6">ISNAP Scale</p>
+              <h2 className="text-3xl font-bold text-enterprise-text leading-tight">
+                Continuous revenue optimization engine.
               </h2>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-600">
-                Experiments, ads, and storefront tuning tied to one performance snapshot—so every sprint moves the
-                needle.
+              <p className="mt-6 text-enterprise-text-muted leading-relaxed">
+                Structured experiments and storefront tuning integrated into a single performance matrix.
               </p>
             </div>
-            <div className="mt-6 flex justify-end">
+            <div className="mt-8 flex justify-end">
               <ArrowCircle />
             </div>
           </Link>
 
-          {/* Bottom right */}
           <Link
             href="/contact"
-            className="group flex min-h-[12.5rem] flex-col justify-between rounded-[1.75rem] border border-slate-200/80 bg-white p-6 shadow-sm transition hover:border-primary-200 hover:shadow-md sm:p-7"
+            className="group enterprise-card p-10 flex flex-col justify-between bg-white/60 hover:bg-white transition-all duration-500 hover:-translate-y-2"
           >
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-600">Catalog migration</p>
-              <h2 className="mt-3 max-w-[22ch] font-sans text-xl font-bold leading-snug tracking-tight text-slate-900 sm:text-2xl">
-                Move listings from any stack without losing momentum
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-enterprise-green mb-6">Catalog Migration</p>
+              <h2 className="text-3xl font-bold text-enterprise-text leading-tight">
+                High-fidelity stack migration.
               </h2>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-600">
-                Structured imports, attribute mapping, and QA checkpoints keep your catalog accurate as you switch tools
-                or partners.
+              <p className="mt-6 text-enterprise-text-muted leading-relaxed">
+                Attribute mapping and QA checkpoints to maintain integrity during platform transitions.
               </p>
             </div>
-            <div className="mt-6 flex justify-end">
+            <div className="mt-8 flex justify-end">
               <ArrowCircle />
             </div>
           </Link>
         </div>
 
-        {/* Full-width strip */}
-        <div className="mt-4 grid overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white shadow-sm lg:grid-cols-2 lg:gap-0">
-          <div className="flex flex-col justify-center p-7 sm:p-8 lg:p-10">
-            <h2 className="max-w-xl font-sans text-xl font-bold leading-snug tracking-tight text-slate-900 sm:text-2xl md:text-3xl">
-              Sell across regions. Price and settle in the currencies your buyers expect.
+        {/* Global Settlement Dashboard */}
+        <div className="mt-10 enterprise-card overflow-hidden bg-white/60 grid lg:grid-cols-2">
+          <div className="p-10 lg:p-16 flex flex-col justify-center">
+            <h2 className="text-4xl font-bold text-enterprise-text tracking-tight leading-[0.95]">
+              Settle in the currencies <span className="text-enterprise-green">your buyers expect.</span>
             </h2>
             <Link
               href="/services"
-              className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary-600 transition hover:text-primary-700"
+              className="mt-10 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-enterprise-text hover:text-enterprise-green transition-colors"
             >
-              See cross-border readiness
-              <span aria-hidden="true">→</span>
+              See Cross-Border Framework
+              <ArrowRightIcon className="h-4 w-4" />
             </Link>
           </div>
-          <div className="relative min-h-[220px] border-t border-slate-100 bg-slate-50/80 lg:border-l lg:border-t-0">
-            <div
-              className="absolute inset-0 opacity-[0.35]"
-              style={{
-                backgroundImage: `radial-gradient(circle, rgb(148 163 184) 1px, transparent 1px)`,
-                backgroundSize: "12px 12px"
-              }}
-            />
-            <div className="relative flex h-full items-center justify-center p-6 lg:justify-end lg:pr-10">
-              <div className="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-4 shadow-lg shadow-slate-900/5">
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Channel health</p>
-                <p className="mt-1 font-sans text-sm font-semibold text-slate-900">Orders by marketplace</p>
-                <ul className="mt-4 space-y-3">
-                  <li className="flex items-center justify-between gap-3 text-sm">
-                    <span className="flex items-center gap-2 text-slate-600">
-                      <span className="text-base" aria-hidden="true">
-                        🇮🇳
-                      </span>
-                      Domestic · INR
-                    </span>
-                    <span className="rounded-full bg-primary-100 px-2 py-0.5 text-xs font-medium text-primary-800">
-                      Active
-                    </span>
-                  </li>
-                  <li className="flex items-center justify-between gap-3 text-sm">
-                    <span className="flex items-center gap-2 text-slate-600">
-                      <span className="text-base" aria-hidden="true">
-                        🇪🇺
-                      </span>
-                      EU · EUR
-                    </span>
-                    <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-900">
-                      Syncing
-                    </span>
-                  </li>
-                  <li className="flex items-center justify-between gap-3 text-sm">
-                    <span className="flex items-center gap-2 text-slate-600">
-                      <span className="text-base" aria-hidden="true">
-                        🇬🇧
-                      </span>
-                      UK · GBP
-                    </span>
-                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">
-                      Setup
-                    </span>
-                  </li>
-                </ul>
+          <div className="bg-enterprise-bg/50 p-10 lg:p-16 border-l border-enterprise-border relative">
+            <div className="absolute inset-0 grid-subtle opacity-20" />
+            <div className="relative enterprise-card p-8 bg-white border-white shadow-premium">
+              <div className="flex items-center justify-between mb-8">
+                <p className="text-[10px] font-bold text-enterprise-text-muted uppercase tracking-widest">Settlement Health</p>
+                <div className="h-2 w-12 rounded-full bg-enterprise-lime/20 overflow-hidden">
+                  <div className="h-full bg-enterprise-green w-3/4" />
+                </div>
               </div>
+              <ul className="space-y-6">
+                {[
+                  {c: "🇮🇳 Domestic · INR", s: "Live", cl: "text-enterprise-green"},
+                  {c: "🇪🇺 EU · EUR", s: "Syncing", cl: "text-enterprise-lime"},
+                  {c: "🇬🇧 UK · GBP", s: "Setup", cl: "text-enterprise-text-muted"}
+                ].map(item => (
+                  <li key={item.c} className="flex items-center justify-between">
+                    <span className="text-sm font-bold text-enterprise-text">{item.c}</span>
+                    <span className={cn("font-mono text-[10px] font-bold uppercase tracking-widest", item.cl)}>{item.s}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

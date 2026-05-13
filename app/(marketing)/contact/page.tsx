@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/Textarea";
 import { addLead, PLATFORM_OPTIONS } from "@/lib/leads";
+import { cn } from "@/lib/utils";
+import { Phone, Mail, MapPin, Clock, Share2, Send, Camera, CheckCircle2 } from "lucide-react";
 
 const leadSchema = z.object({
   fullName: z.string().min(2, "Full Name is required"),
@@ -24,59 +26,6 @@ const leadSchema = z.object({
 });
 
 type LeadFormValues = z.infer<typeof leadSchema>;
-
-function LinkedInIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-      <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-2 6.75h4V21h-4V10.25ZM10 10.25h3.83v1.47h.06c.53-1.01 1.84-2.07 3.8-2.07 4.06 0 4.81 2.48 4.81 5.71V21h-4v-4.95c0-1.18-.03-2.7-1.78-2.7s-2.05 1.29-2.05 2.62V21h-4V10.25Z" />
-    </svg>
-  );
-}
-
-function TwitterIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-      <path d="M18.901 3H21l-4.584 5.238L21.8 21h-4.22l-3.305-4.283L10.45 21H8.35l4.903-5.605L2.2 3h4.33l2.987 3.93L12.948 3h1.997l-4.49 5.157 3.998 5.255L18.9 3Z" />
-    </svg>
-  );
-}
-
-function InstagramIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
-      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="2" />
-      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
-      <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" />
-    </svg>
-  );
-}
-
-function CheckmarkSuccess() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="rounded-xl border border-primary-100 bg-primary-50 p-4"
-    >
-      <div className="flex items-center gap-3">
-        <motion.svg
-          initial={{ scale: 0.6, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          viewBox="0 0 24 24"
-          className="h-6 w-6 text-primary-600"
-          fill="none"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-          <path d="M8 12.5l2.6 2.6L16.5 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </motion.svg>
-        <p className="text-sm font-medium text-primary-700">We'll be in touch within 24 hours.</p>
-      </div>
-    </motion.div>
-  );
-}
 
 export default function ContactPage() {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -119,151 +68,221 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="py-14 md:py-20">
-      <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 lg:grid-cols-5">
-        <motion.aside
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="rounded-xl border border-slate-200 bg-white p-6 lg:col-span-2"
-        >
-          <Link href="/" className="inline-flex items-center gap-1">
-            <span className="font-heading text-xl font-bold tracking-tight text-primary-600">IS</span>
-            <span className="font-heading text-xl font-bold tracking-tight text-slate-900">NAP</span>
-          </Link>
-          <h1 className="mt-6 font-heading text-3xl font-bold text-slate-900">Let's talk growth</h1>
+    <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-50/50">
+      {/* Abstract Background Element */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-[0.03]">
+        <div className="absolute top-[10%] right-[5%] w-[500px] h-[500px] rounded-full bg-black blur-[120px]" />
+        <div className="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full bg-black blur-[100px]" />
+      </div>
 
-          <div className="mt-6 space-y-4 text-sm text-slate-600">
-            <p>
-              <span className="font-medium text-slate-900">Address:</span> Hitech City, Hyderabad
-            </p>
-            <p>
-              <span className="font-medium text-slate-900">Phone:</span> +91 9052640916
-            </p>
-            <p>
-              <span className="font-medium text-slate-900">Email:</span> support@isnap.in
-            </p>
-            <p>
-              <span className="font-medium text-slate-900">Office Hours:</span> Mon-Sat, 10:00 AM - 7:00 PM IST
-            </p>
-          </div>
-
-          <div className="mt-6 flex items-center gap-3 text-slate-600">
-            <a
-              href="https://www.linkedin.com"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 hover:bg-slate-50"
-              aria-label="LinkedIn"
-            >
-              <LinkedInIcon />
-            </a>
-            <a
-              href="https://twitter.com"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 hover:bg-slate-50"
-              aria-label="Twitter"
-            >
-              <TwitterIcon />
-            </a>
-            <a
-              href="https://www.instagram.com"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 hover:bg-slate-50"
-              aria-label="Instagram"
-            >
-              <InstagramIcon />
-            </a>
-          </div>
-
-          <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-5">
-            <p className="text-xs uppercase tracking-widest text-slate-400">Office Location</p>
-            <div className="mt-3 rounded-md border border-slate-200 bg-white p-4">
-              <p className="text-sm font-medium text-slate-900">Hitech City, Hyderabad</p>
-              <p className="mt-1 text-xs text-slate-500">Map placeholder - embed Google Maps iframe here when API key is configured.</p>
-            </div>
-          </div>
-        </motion.aside>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
-          className="rounded-xl border border-slate-200 bg-white p-6 lg:col-span-3"
-        >
-          <h2 className="font-heading text-2xl font-bold text-slate-900">Tell us about your growth goals</h2>
-          <p className="mt-2 text-sm text-slate-600">Share a few details and our team will reach out with the right next steps.</p>
-
-          <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700">Full Name*</label>
-                <Input {...register("fullName")} placeholder="Enter your full name" />
-                {errors.fullName ? <p className="mt-1 text-xs text-red-600">{errors.fullName.message}</p> : null}
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700">Company Name*</label>
-                <Input {...register("companyName")} placeholder="Enter company name" />
-                {errors.companyName ? <p className="mt-1 text-xs text-red-600">{errors.companyName.message}</p> : null}
-              </div>
+      <div className="container relative mx-auto px-6 max-w-7xl">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          
+          {/* LEFT: Contact Information Card */}
+          <motion.div
+            {...({
+              initial: { opacity: 0, x: -20 },
+              animate: { opacity: 1, x: 0 },
+              transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+              className: "lg:col-span-5 space-y-12"
+            } as any)}
+          >
+            <div className="space-y-6">
+              <Link href="/" className="inline-flex items-center gap-1.5 group">
+                <span className="font-heading text-2xl font-black tracking-tighter text-black uppercase">IS</span>
+                <span className="font-heading text-2xl font-black tracking-tighter text-slate-400 uppercase group-hover:text-black transition-colors">NAP</span>
+              </Link>
+              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[0.95]">
+                Let&apos;s talk <br />
+                <span className="text-slate-400 italic">growth.</span>
+              </h1>
+              <p className="text-lg text-slate-500 max-w-md leading-relaxed">
+                Ready to scale your marketplace presence? Reach out to our experts for a personalized acceleration strategy.
+              </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700">Phone*</label>
-                <Input {...register("phone")} placeholder="Enter phone number" />
-                {errors.phone ? <p className="mt-1 text-xs text-red-600">{errors.phone.message}</p> : null}
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700">Email*</label>
-                <Input {...register("email")} type="email" placeholder="Enter email address" />
-                {errors.email ? <p className="mt-1 text-xs text-red-600">{errors.email.message}</p> : null}
-              </div>
+            <div className="grid gap-8">
+              {[
+                { icon: MapPin, title: "Headquarters", content: "HiTech City, Plot no. 90/3, Kavurihills, Madhapur, Hyderabad 500081" },
+                { icon: Phone, title: "Phone", content: "+91 90526 40916" },
+                { icon: Mail, title: "Email", content: "support@isnap.in" },
+                { icon: Clock, title: "Business Hours", content: "Mon - Sat, 10:00 AM - 7:00 PM IST" }
+              ].map((item, i) => (
+                <div key={i} className="flex gap-5 group">
+                  <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm transition-all group-hover:border-black group-hover:bg-black group-hover:text-white">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">{item.title}</p>
+                    <p className="text-sm font-medium text-slate-700 leading-relaxed">{item.content}</p>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div>
-              <p className="mb-2 text-sm font-medium text-slate-700">Platform Interest*</p>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {PLATFORM_OPTIONS.map((platform) => {
-                  const checked = selectedPlatforms.includes(platform);
+            <div className="pt-6 flex items-center gap-4">
+              {[
+                { icon: Share2, href: "#", label: "LinkedIn" },
+                { icon: Send, href: "#", label: "Twitter" },
+                { icon: Camera, href: "#", label: "Instagram" }
+              ].map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  className="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition-all hover:border-black hover:text-black hover:shadow-lg active:scale-95"
+                  aria-label={social.label}
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
+          </motion.div>
 
-                  return (
-                    <label
-                      key={platform}
-                      className="flex cursor-pointer items-center gap-2 rounded-md border border-slate-200 px-3 py-2 text-sm text-slate-700"
+          {/* RIGHT: Contact Form */}
+          <motion.div
+            {...({
+              initial: { opacity: 0, x: 20 },
+              animate: { opacity: 1, x: 0 },
+              transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 },
+              className: "lg:col-span-7"
+            } as any)}
+          >
+            <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-slate-200 via-white to-slate-200 shadow-2xl">
+              <div className="bg-white rounded-[2.25rem] p-8 lg:p-12">
+                <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Share your details</h2>
+                <p className="mt-2 text-slate-500 mb-10 leading-relaxed">Our strategists will analyze your profile and get back to you within 24 hours.</p>
+
+                <form className="space-y-8" onSubmit={handleSubmit(onSubmit)} noValidate>
+                  {isSuccess ? (
+                    <motion.div 
+                      {...({
+                        initial: { opacity: 0, scale: 0.95 },
+                        animate: { opacity: 1, scale: 1 },
+                        className: "flex flex-col items-center justify-center py-12 text-center space-y-4 bg-slate-50 rounded-3xl border border-slate-100"
+                      } as any)}
                     >
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={(event) => {
-                          const nextValues = event.target.checked
-                            ? [...selectedPlatforms, platform]
-                            : selectedPlatforms.filter((item) => item !== platform);
+                      <div className="h-16 w-16 rounded-full bg-black flex items-center justify-center text-white">
+                        <CheckCircle2 className="h-8 w-8" />
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="text-xl font-bold text-slate-900">Message Received</h3>
+                        <p className="text-slate-500">We&apos;ll be in touch very soon.</p>
+                      </div>
+                      <Button variant="outline" onClick={() => setIsSuccess(false)} className="mt-4">Send another message</Button>
+                    </motion.div>
+                  ) : (
+                    <>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Full Name*</label>
+                          <Input 
+                            {...register("fullName")} 
+                            placeholder="Enter name" 
+                            className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 h-14 rounded-2xl px-6"
+                          />
+                          {errors.fullName && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.fullName.message}</p>}
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Company Name*</label>
+                          <Input 
+                            {...register("companyName")} 
+                            placeholder="Enter company" 
+                            className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 h-14 rounded-2xl px-6"
+                          />
+                          {errors.companyName && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.companyName.message}</p>}
+                        </div>
+                      </div>
 
-                          setValue("platformInterest", nextValues, { shouldValidate: true });
-                        }}
-                        className="h-4 w-4 rounded border-slate-300 text-primary-600 focus:ring-primary-600"
-                      />
-                      <span>{platform}</span>
-                    </label>
-                  );
-                })}
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Phone Number*</label>
+                          <Input 
+                            {...register("phone")} 
+                            placeholder="+91..." 
+                            className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 h-14 rounded-2xl px-6"
+                          />
+                          {errors.phone && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.phone.message}</p>}
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Work Email*</label>
+                          <Input 
+                            {...register("email")} 
+                            type="email" 
+                            placeholder="email@company.com" 
+                            className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 h-14 rounded-2xl px-6"
+                          />
+                          {errors.email && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.email.message}</p>}
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <p className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Platforms of Interest*</p>
+                        <div className="grid gap-3 sm:grid-cols-2">
+                          {PLATFORM_OPTIONS.map((platform) => {
+                            const checked = selectedPlatforms.includes(platform);
+                            return (
+                              <label
+                                key={platform}
+                                className={cn(
+                                  "group flex cursor-pointer items-center justify-between rounded-2xl border p-4 transition-all duration-200",
+                                  checked 
+                                    ? "bg-black border-black text-white shadow-lg shadow-black/5" 
+                                    : "bg-slate-50/50 border-transparent hover:border-slate-200 hover:bg-white"
+                                )}
+                              >
+                                <span className="text-sm font-semibold">{platform}</span>
+                                <div className="relative flex h-5 w-5 items-center justify-center">
+                                  <input
+                                    type="checkbox"
+                                    checked={checked}
+                                    onChange={(event) => {
+                                      const nextValues = event.target.checked
+                                        ? [...selectedPlatforms, platform]
+                                        : selectedPlatforms.filter((item) => item !== platform);
+                                      setValue("platformInterest", nextValues, { shouldValidate: true });
+                                    }}
+                                    className="peer h-5 w-5 cursor-pointer opacity-0 absolute z-10"
+                                  />
+                                  <div className={cn(
+                                    "h-5 w-5 rounded-full border-2 transition-all flex items-center justify-center",
+                                    checked ? "bg-white border-white" : "border-slate-300 group-hover:border-slate-400"
+                                  )}>
+                                    {checked && <div className="h-2 w-2 rounded-full bg-black" />}
+                                  </div>
+                                </div>
+                              </label>
+                            );
+                          })}
+                        </div>
+                        {errors.platformInterest && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.platformInterest.message}</p>}
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Your Message</label>
+                        <Textarea 
+                          {...register("message")} 
+                          placeholder="Tell us about your goals..." 
+                          className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 rounded-2xl p-6 min-h-[120px] resize-none"
+                        />
+                        {errors.message && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.message.message}</p>}
+                      </div>
+
+                      {submitError && <p className="text-sm font-bold text-red-500 bg-red-50 p-4 rounded-xl border border-red-100">{submitError}</p>}
+
+                      <Button 
+                        type="submit" 
+                        disabled={isSubmitting} 
+                        className="w-full h-16 rounded-2xl bg-black text-white text-base font-bold hover:bg-slate-800 transition-all shadow-xl shadow-black/10 active:scale-[0.98]"
+                      >
+                        {isSubmitting ? "Processing..." : "Send Message"}
+                      </Button>
+                    </>
+                  )}
+                </form>
               </div>
-              {errors.platformInterest ? <p className="mt-1 text-xs text-red-600">{errors.platformInterest.message}</p> : null}
             </div>
-
-            <div>
-              <label className="mb-1 block text-sm font-medium text-slate-700">Message</label>
-              <Textarea {...register("message")} placeholder="Tell us about your products, channels, and growth goals." />
-              {errors.message ? <p className="mt-1 text-xs text-red-600">{errors.message.message}</p> : null}
-            </div>
-
-            {submitError ? <p className="text-sm text-red-600">{submitError}</p> : null}
-            {isSuccess ? <CheckmarkSuccess /> : null}
-
-            <Button type="submit" loading={isSubmitting} className="w-full" size="lg">
-              Send Message
-            </Button>
-          </form>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

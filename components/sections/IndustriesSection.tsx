@@ -1,76 +1,77 @@
-import EngagementProfileSection from "@/components/sections/EngagementProfileSection";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+"use client";
 
-const industries = [
-  "Apparel",
-  "Electronics",
-  "FMCG",
-  "Handloom",
-  "Furniture",
-  "Pharma",
-  "Cosmetics",
-  "Industrial",
-  "Food & Beverages",
-  "Eco Products",
-  "Home Decor",
-  "Automotive",
-  "Pet Care",
-  "Baby Care",
-  "Ayurveda",
-  "Digital Goods"
+const industryIndex = [
+  "Handlooms", "FMCG", "Apparel", "Cosmetics",
+  "B2B Components", "Eco Products", "Food & Bev", "Electronics",
+  "Furniture", "Pharma", "Industrial", "Digital Goods"
 ];
 
 export function IndustriesSection() {
   return (
-    <section id="industries" className="border-b border-slate-200/80 bg-white py-14 sm:py-20 lg:py-28">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <SectionHeading
-          title="Categories We Work With"
-          subtitle="From niche crafts to global FMCG — if it can be sold online, ISNAP can handle it."
-        />
-
-        <div className="mt-8 grid gap-8 sm:mt-10 sm:gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-14 lg:gap-y-0">
-          <div className="lg:col-span-5">
-            <p className="max-w-md text-[14px] leading-[1.75] text-slate-600 sm:text-[15px] sm:leading-[1.75] md:text-base md:leading-[1.7]">
-              ISNAP&apos;s platform is built to onboard and manage products across any industry vertical, whether
-              you&apos;re in fashion, electronics, pharma, furniture, or something entirely unique. We currently
-              serve 200+ manufacturers across more than 10 major product categories and we&apos;re equipped to take on
-              more.
-            </p>
-
-            <div className="mt-8 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 sm:mt-10 sm:gap-8 sm:pt-8">
-              <div className="min-w-0">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">Manufacturers</p>
-                <p className="mt-2 font-heading text-2xl font-semibold tabular-nums tracking-tight text-slate-900 sm:text-3xl">
-                  200+
-                </p>
+    <section id="industries" className="relative section-spacing overflow-hidden bg-white">
+      <div className="absolute inset-0 grid-subtle opacity-[0.5] pointer-events-none" />
+      
+      <div className="max-container relative z-10">
+        <div className="flex flex-col gap-24">
+          {/* Header Layer: Strategic Positioning */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-enterprise-border bg-enterprise-bg px-4 py-1.5 mb-10">
+                <span className="h-1.5 w-1.5 rounded-full bg-enterprise-green" />
+                <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-enterprise-text">Industry Vertical Coverage</p>
               </div>
-              <div className="min-w-0">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">Categories</p>
-                <p className="mt-2 font-heading text-2xl font-semibold tabular-nums tracking-tight text-slate-900 sm:text-3xl">
-                  10+
-                </p>
-              </div>
+              <h2 className="section-heading mb-10">
+                Categories <br/><span className="text-enterprise-green">We Work With.</span>
+              </h2>
+              <p className="text-xl text-enterprise-text-muted leading-relaxed max-w-2xl">
+                From artisan crafts to global enterprise FMCG, we handle the complex catalog logic for every major product category.
+              </p>
             </div>
           </div>
 
-          <div className="lg:col-span-7">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">Sectors &amp; verticals</p>
-            <ul className="mt-4 grid grid-cols-2 gap-2.5 sm:mt-5 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-              {industries.map((industry) => (
-                <li
-                  key={industry}
-                  className="rounded-xl border border-slate-200/80 bg-slate-50/70 px-3 py-2.5 text-[12px] font-medium text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.03)] sm:text-[13px]"
-                >
-                  {industry}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+          {/* Category Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+             {/* Left: Category Index */}
+             <div className="lg:col-span-8">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                   {industryIndex.map((sector) => (
+                     <div
+                       key={sector}
+                       className="group p-8 rounded-[24px] border border-enterprise-border bg-white hover:border-enterprise-green hover:shadow-premium transition-all duration-500 cursor-default"
+                     >
+                        <p className="text-sm font-bold text-enterprise-text tracking-tight group-hover:text-enterprise-green transition-colors">{sector}</p>
+                     </div>
+                   ))}
+                </div>
+             </div>
 
-        <div className="mt-8 min-w-0 sm:mt-10 lg:mt-14">
-          <EngagementProfileSection />
+             {/* Right: Scale Summary */}
+             <div className="lg:col-span-4 flex flex-col gap-8">
+                <div className="p-10 rounded-[32px] bg-enterprise-text text-white relative overflow-hidden shadow-2xl">
+                   <div className="absolute inset-0 grid-subtle opacity-[0.1] pointer-events-none" />
+                   <p className="text-[11px] font-bold text-enterprise-green uppercase tracking-widest mb-12">Operational Scale</p>
+                   <div className="space-y-12">
+                      <div>
+                         <p className="text-5xl font-bold tracking-tighter">200+</p>
+                         <p className="mt-3 text-[12px] font-bold uppercase tracking-widest text-white/40">Global Brand Portfolios</p>
+                      </div>
+                      <div>
+                         <p className="text-5xl font-bold tracking-tighter">12+</p>
+                         <p className="mt-3 text-[12px] font-bold uppercase tracking-widest text-white/40">Core Industry Verticals</p>
+                      </div>
+                   </div>
+                </div>
+                
+                <div className="p-10 rounded-[32px] border border-enterprise-border bg-enterprise-bg/20">
+                   <p className="text-lg font-bold text-enterprise-text leading-tight mb-4">
+                      Marketplace-specific catalog logic for cross-category scale.
+                   </p>
+                   <p className="text-sm text-enterprise-text-muted leading-relaxed">
+                      Our platform adapts to the specific data requirements of each category, ensuring 100% compliance.
+                   </p>
+                </div>
+             </div>
+          </div>
         </div>
       </div>
     </section>

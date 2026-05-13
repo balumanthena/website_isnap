@@ -1,41 +1,48 @@
+"use client";
+
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
-const stats = [
+const telemetryNodes = [
   { value: 200, suffix: "+", label: "Manufacturers" },
   { value: 10, suffix: "+", label: "Categories" },
-  { value: 5, suffix: "", label: "Major Platforms" },
-  { value: 3, suffix: "X", label: "Average Growth" }
+  { value: 48, suffix: "h", label: "Deployment" },
+  { value: 3, suffix: "X", label: "Revenue Velocity" },
+  { value: 99.9, suffix: "%", label: "Uptime" }
 ];
 
 export function StatsSection() {
   return (
-    <section className="relative border-b border-slate-200/80 bg-white py-16 sm:py-20">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <div className="rounded-2xl border border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.05)]">
-          <div className="px-6 py-10 sm:px-8 sm:py-12">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-slate-500">
-              Scale snapshot
-            </p>
-            <h2 className="mt-3 max-w-[22ch] font-sans text-3xl font-semibold leading-[1.1] tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              The backbone of global commerce
-            </h2>
-            <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
-              A single operating layer for catalogue, channels, and fulfilment—built to handle high-volume commerce with
-              enterprise-grade reliability.
-            </p>
-          </div>
+    <section className="relative py-24 md:py-32 overflow-hidden bg-enterprise-text">
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 grid-subtle opacity-[0.05] pointer-events-none" />
+      
+      <div className="max-container relative z-10">
+         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 md:gap-24">
+            <div className="flex flex-col items-center lg:items-start shrink-0 text-center lg:text-left">
+               <p className="text-[11px] font-bold text-white/40 uppercase tracking-[0.2em] mb-4">Enterprise Scale</p>
+               <div className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-enterprise-green shadow-[0_0_12px_rgba(115,217,120,0.6)]" />
+                  <span className="text-[11px] font-bold text-white uppercase tracking-widest">Active Operations</span>
+               </div>
+            </div>
 
-          <div className="grid grid-cols-2 gap-px border-t border-slate-200/80 bg-slate-200/80 sm:grid-cols-4">
-            {stats.map((stat) => (
-              <article key={stat.label} className="bg-white px-6 py-7 sm:px-8">
-                <p className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                </p>
-                <p className="mt-1.5 text-[12px] font-medium text-slate-500 sm:text-[13px]">{stat.label}</p>
-              </article>
-            ))}
-          </div>
-        </div>
+            <div className="flex-1 w-full grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-16">
+               {telemetryNodes.slice(0, 4).map((node) => (
+                 <div key={node.label} className="text-center md:text-left">
+                    <p className="text-3xl md:text-5xl font-bold tracking-tighter text-white mb-3">
+                       <AnimatedCounter value={node.value} suffix={node.suffix} />
+                    </p>
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-white/30">{node.label}</p>
+                 </div>
+               ))}
+            </div>
+
+            <div className="hidden xl:flex items-center gap-6 pl-16 border-l border-white/10 shrink-0">
+               <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest leading-loose text-right">
+                  Centralized <br/>Marketplace <br/>Governance
+               </p>
+            </div>
+         </div>
       </div>
     </section>
   );

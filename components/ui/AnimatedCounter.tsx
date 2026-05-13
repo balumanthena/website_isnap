@@ -33,9 +33,9 @@ export function AnimatedCounter({ value, suffix = "+", duration = 1.2, className
   }, [rounded]);
 
   return (
-    <motion.span className={className}>
+    <span className={className}>
       {displayValue}
       {suffix}
-    </motion.span>
+    </span>
   );
 }

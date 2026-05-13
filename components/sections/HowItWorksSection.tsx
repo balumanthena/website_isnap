@@ -1,190 +1,115 @@
-import Link from "next/link";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { cn } from "@/lib/utils";
+"use client";
 
-type Step = {
-  number: string;
-  title: string;
-  description: string;
-  cta?: string;
-};
+import { Button } from "@/components/ui/button";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
-const steps: Step[] = [
-  {
-    number: "01",
-    title: "Submit Details",
-    description: "Share your brand profile, catalog, and current sales channels. We map your goals, constraints, and growth readiness.",
-    cta: "Start onboarding"
+const executionPhases = [
+  { 
+    title: "Marketplace Integration", 
+    desc: "Centralize your product catalog and brand architecture into our unified ecosystem." 
   },
-  {
-    number: "02",
-    title: "AI Mapping & Catalog",
-    description: "ISNAP structures your product data and enriches listing quality using AI to improve search relevance and conversion outcomes."
+  { 
+    title: "Catalog Automation", 
+    desc: "AI-powered mapping and attribute categorization for marketplace compliance." 
   },
-  {
-    number: "03",
-    title: "Go Live on Platforms",
-    description: "We activate your brand across marketplaces with channel-specific configurations, pricing controls, and operational readiness."
+  { 
+    title: "Global Activation", 
+    desc: "Simultaneous go-live across Amazon, Flipkart, Walmart, and your D2C store." 
   },
-  {
-    number: "04",
-    title: "Launch Campaigns",
-    description: "Performance campaigns go live with clear KPI ownership, rapid experimentation cycles, and budget discipline."
+  { 
+    title: "Growth Optimization", 
+    desc: "Performance marketing and campaign scaling to drive revenue velocity." 
   },
-  {
-    number: "05",
-    title: "Track from Dashboard",
-    description: "Monitor orders, revenue, and channel-level performance from a single source of truth built for daily decision-making."
+  { 
+    title: "Operational Insights", 
+    desc: "Track sales, inventory, and fulfillment via a single centralized dashboard." 
   }
 ];
 
 export function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="relative border-b border-slate-200/80 bg-[#F8FBF9] py-16 sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_12%_0%,rgba(100,181,73,0.09),transparent_55%)]" aria-hidden />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.045)_1px,transparent_1px)] bg-[size:72px_72px]" aria-hidden />
+    <section id="how-it-works" className="relative section-spacing overflow-hidden bg-white">
+      <div className="absolute inset-0 grid-subtle opacity-[0.4] pointer-events-none" />
+      
+      <div className="max-container relative z-10">
+        <div className="flex flex-col gap-24">
+          {/* Section Header */}
+          <div className="max-w-4xl">
+             <div className="inline-flex items-center gap-2 rounded-full border border-enterprise-border bg-enterprise-bg px-4 py-1.5 mb-10">
+                <span className="h-1.5 w-1.5 rounded-full bg-enterprise-green" />
+                <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-enterprise-text">Enterprise Workflow</p>
+             </div>
+             <h2 className="section-heading mb-10">
+                A roadmap to institutional <br/><span className="text-enterprise-green">marketplace dominance.</span>
+             </h2>
+             <p className="text-xl text-enterprise-text-muted leading-relaxed max-w-2xl">
+                We replace fragmented manual processes with a streamlined, automated workflow designed for global high-volume brand portfolios.
+             </p>
+          </div>
 
-      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="How It Works"
-          title="A proven 5-step launch and growth system"
-          subtitle="Structured execution from initial onboarding to measurable multi-platform scale."
-        />
+          {/* Connected Pipeline */}
+          <div className="relative">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-enterprise-border border border-enterprise-border rounded-[40px] overflow-hidden shadow-premium">
+                {executionPhases.map((phase, i) => (
+                  <div key={phase.title} className="bg-white p-12 flex flex-col group hover:bg-enterprise-bg/20 transition-all duration-500 relative">
+                     {/* Connector Line (Desktop) */}
+                     {i < executionPhases.length - 1 && (
+                       <div className="hidden lg:block absolute top-16 -right-4 z-20">
+                          <ArrowRightIcon className="h-4 w-4 text-enterprise-border" />
+                       </div>
+                     )}
+                     
+                     <div className="mb-12">
+                        <div className="h-12 w-12 rounded-xl bg-enterprise-text flex items-center justify-center text-enterprise-green font-bold text-sm group-hover:scale-110 transition-all duration-500">
+                           {String(i + 1).padStart(2, '0')}
+                        </div>
+                     </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-2.5 sm:mt-8 sm:grid-cols-3 sm:gap-3">
-          {[
-            { label: "Launch speed", value: "70% faster" },
-            { label: "Approval quality", value: "98% success" },
-            { label: "Team visibility", value: "Single dashboard" }
-          ].map((item) => (
-            <div key={item.label} className="rounded-xl border border-slate-200/80 bg-white/90 px-3.5 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400">{item.label}</p>
-              <p className="mt-1 text-sm font-semibold tracking-tight text-slate-900">{item.value}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-12 lg:gap-6">
-          {steps.map((step, index) => {
-            const cardSpan = [
-              "lg:col-span-7",
-              "lg:col-span-5",
-              "lg:col-span-12",
-              "lg:col-span-6",
-              "lg:col-span-6"
-            ][index];
-
-            const visual = (
-              <div
-                className={cn(
-                  "mt-5 rounded-xl border border-slate-200/75 bg-gradient-to-br from-slate-50 to-white",
-                  index === 2 ? "p-4 sm:p-5" : "p-3.5 sm:p-4"
-                )}
-              >
-                {index === 0 ? (
-                  <div className="space-y-2.5">
-                    <div className="h-2.5 w-2/3 rounded-full bg-slate-200" />
-                    <div className="h-8 rounded-md bg-white ring-1 ring-slate-200" />
-                    <div className="ml-8 h-8 rounded-md bg-white ring-1 ring-slate-200" />
-                    <div className="h-8 w-4/5 rounded-md bg-white ring-1 ring-slate-200" />
+                     <div className="flex-1">
+                        <h3 className="text-lg font-bold text-enterprise-text tracking-tight mb-4 group-hover:text-enterprise-green transition-colors">{phase.title}</h3>
+                        <p className="text-[15px] text-enterprise-text-muted leading-relaxed">
+                           {phase.desc}
+                        </p>
+                     </div>
                   </div>
-                ) : null}
+                ))}
+             </div>
+          </div>
 
-                {index === 1 ? (
-                  <div className="flex h-[112px] items-center justify-center rounded-lg bg-white ring-1 ring-slate-200">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 ring-1 ring-primary-200">
-                      <div className="h-5 w-5 rounded-full bg-primary-500/85" />
-                    </div>
-                  </div>
-                ) : null}
-
-                {index === 2 ? (
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <div className="rounded-lg bg-white p-3 ring-1 ring-slate-200">
-                      <div className="h-2 w-1/2 rounded-full bg-slate-200" />
-                      <div className="mt-3 space-y-2">
-                        <div className="h-2 rounded-full bg-slate-100" />
-                        <div className="h-2 w-4/5 rounded-full bg-slate-100" />
-                        <div className="h-2 w-2/3 rounded-full bg-slate-100" />
+          {/* Strategic CTA Banner */}
+          <div className="mt-12">
+             <div className="p-16 rounded-[48px] bg-enterprise-text text-white relative overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 grid-subtle opacity-[0.1] pointer-events-none" />
+                
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-enterprise-green/10 to-transparent" />
+                
+                <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-16">
+                   <div className="max-w-3xl text-center lg:text-left">
+                      <div className="inline-flex items-center gap-2 mb-8 opacity-60">
+                         <div className="h-px w-8 bg-enterprise-green" />
+                         <span className="text-[11px] font-bold uppercase tracking-widest text-enterprise-green">Velocity Metric</span>
                       </div>
-                    </div>
-                    <div className="rounded-lg bg-[#0F172A] p-3 ring-1 ring-slate-700">
-                      <div className="h-2 w-1/3 rounded-full bg-slate-600" />
-                      <div className="mt-3 h-20 rounded-md bg-slate-800" />
-                      <div className="mt-3 h-2 w-2/3 rounded-full bg-primary-500/80" />
-                    </div>
-                  </div>
-                ) : null}
-
-                {index === 3 ? (
-                  <div className="flex h-[112px] items-end gap-2 rounded-lg bg-white p-3 ring-1 ring-slate-200">
-                    {[32, 48, 40, 60, 72].map((h, i) => (
-                      <span key={i} className="flex-1 rounded-sm bg-gradient-to-t from-primary-500 to-primary-300" style={{ height: `${h}px` }} />
-                    ))}
-                  </div>
-                ) : null}
-
-                {index === 4 ? (
-                  <div className="space-y-3 rounded-lg bg-white p-3 ring-1 ring-slate-200">
-                    <div className="flex items-center justify-between">
-                      <div className="h-2 w-1/3 rounded-full bg-slate-200" />
-                      <div className="h-2 w-12 rounded-full bg-rose-300" />
-                    </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-                      <div className="h-full w-[76%] rounded-full bg-primary-500/85" />
-                    </div>
-                    <div className="h-2 w-2/3 rounded-full bg-slate-100" />
-                  </div>
-                ) : null}
-              </div>
-            );
-
-            return (
-              <article
-                key={step.number}
-                className={cn(
-                  "group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition duration-200 ease-out hover:border-primary-200/70 hover:shadow-[0_16px_30px_-22px_rgba(15,23,42,0.35)] sm:p-5 lg:p-6",
-                  cardSpan
-                )}
-              >
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-50/40 via-transparent to-slate-50/40" />
+                      <h3 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 leading-tight max-w-xl">
+                         Scale across all channels in <span className="text-enterprise-green">under 48 hours.</span>
+                      </h3>
+                      <p className="text-white/40 text-lg leading-relaxed max-w-2xl">
+                         Our automated catalog mapping allows for rapid, compliant deployment across India&apos;s largest marketplaces with zero manual overhead.
+                      </p>
+                   </div>
+                   
+                   <div className="flex flex-col items-center gap-6">
+                      <Button size="lg" className="h-[72px] px-12 rounded-full bg-enterprise-green text-enterprise-text font-bold text-[15px] uppercase tracking-widest hover:bg-white hover:text-enterprise-text transition-all shadow-2xl shadow-enterprise-green/30 active:scale-95">
+                         Start Enterprise Audit
+                      </Button>
+                      <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em]">Institutional Grade SLA</p>
+                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-full border border-primary-200/70 bg-primary-50 px-2 font-mono text-[10px] font-semibold text-primary-700">
-                    {step.number}
-                  </span>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">Step {step.number}</p>
-                </div>
-
-                <h3 className="relative mt-3 font-sans text-xl font-semibold tracking-tight text-slate-900">{step.title}</h3>
-                <p className="relative mt-2 text-sm leading-relaxed text-slate-600">{step.description}</p>
-                {step.cta ? (
-                  <Link href="/contact" className="relative mt-3 inline-flex text-sm font-semibold text-primary-700 transition hover:text-primary-600">
-                    {step.cta} <span aria-hidden className="ml-1">→</span>
-                  </Link>
-                ) : null}
-
-                {visual}
-              </article>
-            );
-          })}
-        </div>
-
-        <div className="mt-8 rounded-2xl border border-slate-200/80 bg-white/85 p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:mt-10 sm:p-5 lg:p-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-slate-600">
-              Every step is managed by one accountable team with clear milestones and weekly reporting.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-primary-700 transition hover:text-primary-600"
-            >
-              Start your launch plan <span aria-hidden>→</span>
-            </Link>
+             </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
+

@@ -10,7 +10,7 @@ export interface ScrollFadeInSectionProps {
 
 export function ScrollFadeInSection({ children, delay = 0 }: ScrollFadeInSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref as any, { once: true, amount: 0.05 });
 
   return (
     <motion.div

@@ -1,74 +1,88 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export function HumanTrustSection() {
   return (
-    <section className="border-b border-slate-200/70 bg-[#f4f5f6] py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
-          <div className="lg:col-span-5">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-slate-600">The ISNAP advantage</p>
-            <h2 className="mt-4 max-w-[12ch] font-heading text-4xl font-semibold leading-[1.03] tracking-tight text-slate-800 sm:text-5xl lg:text-[3.4rem]">
-              Built for operators, not just tools
+    <section className="relative section-spacing overflow-hidden bg-white">
+      <div className="absolute inset-0 grid-subtle opacity-[0.4] pointer-events-none" />
+      
+      <div className="max-container relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
+          {/* Left: Strategic Governance Narrative */}
+          <div className="lg:col-span-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-enterprise-border bg-enterprise-bg px-4 py-1.5 mb-10">
+              <span className="h-1.5 w-1.5 rounded-full bg-enterprise-green" />
+              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-enterprise-text">Operational Integrity</p>
+            </div>
+            
+            <h2 className="section-heading mb-10">
+              The institutional standard <br/>for <span className="text-enterprise-green">global governance.</span>
             </h2>
-            <p className="mt-5 max-w-md text-[1.05rem] leading-relaxed text-slate-600">
-              What sets ISNAP apart is not only the platform, but the people behind it. Our commerce specialists work
-              as an extension of your team to execute with consistency across every channel.
+            
+            <p className="text-xl text-enterprise-text-muted leading-relaxed max-w-xl mb-12">
+              We provide the technical orchestration and strategic oversight required for high-volume brands to achieve multi-channel dominance. Our platform ensures absolute data integrity and marketplace compliance at enterprise scale.
             </p>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-slate-600">
-              From onboarding to daily optimization, we help operators scale with confidence.
-            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-enterprise-border">
+               {[
+                 { label: "Technical Rigor", desc: "Every operation is governed by automated validation protocols that ensure 100% marketplace compliance." },
+                 { label: "Strategic Oversight", desc: "Institutional-grade monitoring of pricing parity, inventory sync, and account health across every node." }
+               ].map(item => (
+                 <div key={item.label}>
+                    <p className="text-lg font-bold text-enterprise-text mb-4 tracking-tight">{item.label}</p>
+                    <p className="text-base text-enterprise-text-muted leading-relaxed">{item.desc}</p>
+                 </div>
+               ))}
+            </div>
           </div>
 
-          <div className="relative lg:col-span-7">
-            <div className="grid grid-cols-12 gap-4 sm:gap-5">
-              <div className="col-span-5 flex flex-col gap-4 sm:gap-5">
-                <article className="group relative overflow-hidden rounded-xl border border-slate-200/70 shadow-[0_10px_26px_-14px_rgba(15,23,42,0.28)]">
-                  <div className="relative aspect-[5/4]">
-                    <Image
-                      src="/images/trust-team-1.jpg"
-                      alt="Operator reviewing ecommerce tasks at desk"
-                      fill
-                      sizes="(min-width: 1024px) 340px, 45vw"
-                      className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.05]"
-                    />
-                    <div className="absolute inset-0 bg-primary-700/10" />
-                    <div className="pointer-events-none absolute bottom-0 right-0 h-16 w-16 rounded-tl-[1.25rem] bg-gradient-to-br from-primary-400/75 to-emerald-400/75" />
-                  </div>
-                </article>
+          {/* Right: Platform Governance Visual */}
+          <div className="lg:col-span-6">
+             <div className="relative group">
+                {/* Subtle Glow Aura */}
+                <div className="absolute -inset-4 bg-enterprise-green/5 rounded-[60px] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                
+                <div className="relative rounded-[48px] p-12 bg-enterprise-bg border border-enterprise-border shadow-2xl overflow-hidden">
+                   <div className="absolute inset-0 opacity-[0.2] grid-subtle pointer-events-none" />
+                   
+                   <div className="relative z-10 text-center mb-16">
+                      <div className="h-24 w-24 rounded-3xl bg-white border border-enterprise-border flex items-center justify-center mb-8 mx-auto shadow-sm group-hover:scale-105 transition-transform duration-700">
+                         <div className="h-4 w-4 rounded-full bg-enterprise-green shadow-[0_0_15px_rgba(115,217,120,0.8)] animate-pulse" />
+                      </div>
+                      <p className="text-[11px] font-bold text-enterprise-text-muted uppercase tracking-[0.2em] mb-4">Centralized Command Status</p>
+                      <p className="text-4xl font-bold text-enterprise-text tracking-tighter">Systems Operational</p>
+                   </div>
+                   
+                   <div className="grid grid-cols-2 gap-4 text-left relative z-10">
+                      {[
+                        { label: "Data Integrity", value: "Verified", desc: "100% Sync" },
+                        { label: "Marketplace SLA", value: "99.98%", desc: "Institutional" },
+                        { label: "Security Protocol", value: "Active", desc: "Enterprise" },
+                        { label: "Global Reach", value: "20+ Nodes", desc: "Connected" }
+                      ].map(item => (
+                        <div key={item.label} className="p-8 rounded-[32px] bg-white border border-enterprise-border hover:shadow-premium transition-all duration-500">
+                           <p className="text-[10px] font-bold text-enterprise-text-muted uppercase mb-1 tracking-widest">{item.label}</p>
+                           <p className="text-xl font-bold text-enterprise-text mb-1">{item.value}</p>
+                           <p className="text-[10px] font-medium text-enterprise-green uppercase tracking-widest">{item.desc}</p>
+                        </div>
+                      ))}
+                   </div>
 
-                <article className="group relative overflow-hidden rounded-xl border border-slate-200/70 shadow-[0_10px_26px_-14px_rgba(15,23,42,0.28)]">
-                  <div className="relative aspect-[5/4]">
-                    <Image
-                      src="/images/trust-team-3.jpg"
-                      alt="Team collaborating in planning session"
-                      fill
-                      sizes="(min-width: 1024px) 340px, 45vw"
-                      className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.05]"
-                    />
-                    <div className="absolute inset-0 bg-primary-800/22 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-primary-600/10" />
-                  </div>
-                </article>
-              </div>
-
-              <article className="group relative col-span-7 overflow-hidden rounded-xl border border-slate-200/70 shadow-[0_16px_36px_-16px_rgba(15,23,42,0.32)]">
-                <div className="relative h-full min-h-[23.5rem]">
-                  <Image
-                    src="/images/trust-team-2.jpg"
-                    alt="Commerce experts reviewing marketplace performance together"
-                    fill
-                    sizes="(min-width: 1024px) 560px, 70vw"
-                    className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.05]"
-                  />
-                  <div className="absolute inset-0 bg-primary-700/10" />
-                  <div className="pointer-events-none absolute left-0 top-0 h-14 w-28 rounded-br-[1.5rem] bg-gradient-to-r from-primary-500/85 to-primary-600/70" />
+                   <div className="mt-12 pt-8 border-t border-enterprise-border flex items-center justify-between opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                      <p className="text-[10px] font-bold text-enterprise-text-muted uppercase tracking-widest">Compliance Partners</p>
+                      <div className="flex gap-6 text-[10px] font-black tracking-tighter text-enterprise-text">
+                         <span>AMAZON</span>
+                         <span>FLIPKART</span>
+                         <span>WALMART</span>
+                      </div>
+                   </div>
                 </div>
-              </article>
-            </div>
+             </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

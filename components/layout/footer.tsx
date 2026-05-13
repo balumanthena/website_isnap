@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { LogoMark } from "@/components/LogoMark";
 
 type FooterLink = {
   label: string;
@@ -9,10 +10,10 @@ type FooterLink = {
 };
 
 const servicesLinks: FooterLink[] = [
-  { label: "Growth Strategy", href: "/services" },
-  { label: "Performance Marketing", href: "/services" },
-  { label: "Conversion Optimization", href: "/services" },
-  { label: "Lifecycle Automation", href: "/services" }
+  { label: "Marketplace Onboarding", href: "/services/marketplace-onboarding-automation" },
+  { label: "Catalogue Intelligence", href: "/services/catalogue-listing-automation" },
+  { label: "Performance Marketing", href: "/services/digital-marketing" },
+  { label: "Growth Solutions", href: "/services/brand-growth-solutions" }
 ];
 
 const companyLinks: FooterLink[] = [
@@ -70,61 +71,85 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
   );
 }
 
+
 export function Footer() {
   return (
-    <motion.footer
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
-      className="mt-16 border-t-2 border-primary-500 bg-slate-900"
-    >
-      <div className="mx-auto w-full max-w-6xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-5">
-          <div>
-            <p className="font-heading text-2xl font-bold text-white">ISNAP</p>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-300">
-              Empowering 200+ manufacturers across India.
+    <footer className="relative bg-enterprise-text pt-40 pb-20 text-white overflow-hidden">
+      {/* Structural Anchor */}
+      <div className="absolute inset-0 grid-subtle opacity-[0.05] pointer-events-none" />
+      
+      <div className="max-container relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-12 lg:gap-24">
+          <div className="md:col-span-4">
+            <Link href="/" className="inline-block transition-opacity hover:opacity-80">
+              <LogoMark light />
+            </Link>
+            <p className="mt-10 max-w-sm text-lg text-white/40 leading-relaxed">
+              The AI-powered growth partner for high-volume brands in India. Launching and managing products across all major marketplaces from a single dashboard.
             </p>
-            <div className="mt-5 flex items-center gap-3 text-slate-300">
-              <Link href="https://www.linkedin.com" aria-label="LinkedIn" className="transition-colors hover:text-white">
-                <LinkedInIcon />
-              </Link>
-              <Link href="https://twitter.com" aria-label="Twitter" className="transition-colors hover:text-white">
-                <TwitterIcon />
-              </Link>
-              <Link href="https://www.instagram.com" aria-label="Instagram" className="transition-colors hover:text-white">
-                <InstagramIcon />
-              </Link>
+            <div className="mt-12 flex items-center gap-6">
+              {[LinkedInIcon, TwitterIcon].map((Icon, i) => (
+                <Link 
+                  key={i} 
+                  href="#" 
+                  className="text-white/20 hover:text-enterprise-green transition-all duration-300"
+                >
+                  <Icon />
+                </Link>
+              ))}
             </div>
           </div>
 
-          <FooterColumn title="Services" links={servicesLinks} />
-          <FooterColumn title="Company" links={companyLinks} />
-          <FooterColumn title="Resources" links={resourcesLinks} />
+          <div className="md:col-span-2">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-enterprise-green mb-10">Solutions</p>
+            <ul className="space-y-4">
+              {servicesLinks.map(l => (
+                <li key={l.label}>
+                  <Link href={l.href} className="text-[14px] text-white/40 hover:text-white transition-colors">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <div>
-            <p className="font-heading text-sm font-semibold uppercase tracking-wide text-white">Contact</p>
-            <div className="mt-4 space-y-2 text-sm text-slate-300">
-              <p>Hitech City, Hyderabad</p>
-              <p>+91 90000 00000</p>
-              <p>hello@isnap.ai</p>
+          <div className="md:col-span-2">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-enterprise-green mb-10">Company</p>
+            <ul className="space-y-4">
+              {companyLinks.map(l => (
+                <li key={l.label}>
+                  <Link href={l.href} className="text-[14px] text-white/40 hover:text-white transition-colors">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-4">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-enterprise-green mb-10">Headquarters</p>
+            <div className="space-y-8 text-[14px] text-white/40">
+              <p className="leading-relaxed max-w-xs">HiTech City, Plot no. 90/3, Phase 3, Kavurihills, Madhapur, Hyderabad, Telangana 500081</p>
+              <div className="space-y-2">
+                <p className="font-bold text-white/60">+91 9052640916</p>
+                <Link href="mailto:support@isnap.in" className="block text-enterprise-green hover:underline">support@isnap.in</Link>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-slate-800 pt-5 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} ISNAP. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <Link href="/privacy" className="transition-colors hover:text-slate-200">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="transition-colors hover:text-slate-200">
-              Terms
-            </Link>
+        <div className="mt-40 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <p className="text-[12px] font-medium text-white/20">
+              © {new Date().getFullYear()} ISNAP Operating Systems. All rights reserved.
+            </p>
+            <div className="flex items-center gap-10">
+              <Link href="/privacy" className="text-[12px] font-medium text-white/20 hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="text-[12px] font-medium text-white/20 hover:text-white transition-colors">Terms of Service</Link>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/5">
+            <span className="h-1.5 w-1.5 rounded-full bg-enterprise-green" />
+            <p className="text-[11px] font-bold text-white/60 uppercase tracking-widest">Systems Operational</p>
           </div>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }
