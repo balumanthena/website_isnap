@@ -22,9 +22,11 @@ export default function AdminAnalyticsPage() {
   return (
     <div className="max-w-7xl mx-auto space-y-10 py-6">
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col md:flex-row md:items-end justify-between gap-4"
+        {...({
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          className: "flex flex-col md:flex-row md:items-end justify-between gap-4"
+        } as any)}
       >
         <div>
           <h1 className="text-4xl font-bold text-gray-900 tracking-tight leading-tight">Editorial Intelligence</h1>
@@ -48,11 +50,13 @@ export default function AdminAnalyticsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, i) => (
           <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-black/[0.02] flex flex-col group hover:border-black/10 transition-all cursor-default"
+            {...({
+              key: i,
+              initial: { opacity: 0, scale: 0.95 },
+              animate: { opacity: 1, scale: 1 },
+              transition: { delay: i * 0.1 },
+              className: "bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-black/[0.02] flex flex-col group hover:border-black/10 transition-all cursor-default"
+            } as any)}
           >
             <div className="flex items-center justify-between mb-4">
               <div className={cn("p-3 rounded-2xl", stat.bg)}>
@@ -87,14 +91,16 @@ export default function AdminAnalyticsPage() {
               {/* Fake Bar Chart */}
               {[60, 45, 80, 55, 90, 70, 40, 85, 65, 50, 75, 95].map((height, i) => (
                 <motion.div 
-                  key={i}
-                  initial={{ height: 0 }}
-                  animate={{ height: `${height}%` }}
-                  transition={{ delay: 0.5 + (i * 0.05), type: "spring", damping: 12 }}
-                  className={cn(
-                    "flex-1 rounded-t-xl transition-all duration-500 group-hover:scale-105",
-                    i % 3 === 0 ? "bg-black" : i % 3 === 1 ? "bg-blue-500" : "bg-gray-200"
-                  )}
+                  {...({
+                    key: i,
+                    initial: { height: 0 },
+                    animate: { height: `${height}%` },
+                    transition: { delay: 0.5 + (i * 0.05), type: "spring", damping: 12 },
+                    className: cn(
+                      "flex-1 rounded-t-xl transition-all duration-500 group-hover:scale-105",
+                      i % 3 === 0 ? "bg-black" : i % 3 === 1 ? "bg-blue-500" : "bg-gray-200"
+                    )
+                  } as any)}
                 />
               ))}
               <div className="absolute bottom-0 left-0 w-full h-px bg-gray-100" />
@@ -137,10 +143,12 @@ export default function AdminAnalyticsPage() {
                    </div>
                    <div className="h-1.5 w-full bg-gray-50 rounded-full overflow-hidden">
                       <motion.div 
-                        initial={{ width: 0 }}
-                        animate={{ width: src.value }}
-                        transition={{ delay: 1 + (i * 0.1), duration: 1 }}
-                        className={cn("h-full rounded-full", src.color)} 
+                        {...({
+                          initial: { width: 0 },
+                          animate: { width: src.value },
+                          transition: { delay: 1 + (i * 0.1), duration: 1 },
+                          className: cn("h-full rounded-full", src.color)
+                        } as any)} 
                       />
                    </div>
                 </div>
