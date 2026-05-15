@@ -27,6 +27,8 @@ const config: Config = {
       },
       boxShadow: {
         premium: "0 8px 20px rgba(15,23,42,.04)",
+        "premium-lg": "0 20px 40px rgba(15,23,42,.08)",
+        "glass": "0 8px 32px 0 rgba(15,23,42,0.12)",
         "enterprise-card": "0 8px 20px rgba(15,23,42,.04)",
         "enterprise-nav": "0 4px 16px rgba(15,23,42,.02)",
       },

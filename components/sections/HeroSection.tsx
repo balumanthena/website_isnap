@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32 bg-white">
+    <section className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-20 bg-white">
       {/* Background Architectural Grid */}
       <div className="absolute inset-0 grid-subtle opacity-[0.5] pointer-events-none" />
       
@@ -20,24 +20,24 @@ export function HeroSection() {
                 <span className="h-1.5 w-1.5 rounded-full bg-enterprise-green" />
                 <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-enterprise-text">Marketplace Operations Dashboard</p>
               </div>
-              <h1 className="hero-heading mb-12 max-w-4xl leading-tight">
+              <h1 className="hero-heading mb-12 max-w-4xl">
                 Launch and scale across <span className="text-enterprise-green">India's leading</span> marketplaces.
               </h1>
-              <p className="text-xl text-enterprise-text-muted leading-relaxed max-w-xl mb-12">
+              <p className="text-xl text-enterprise-text-muted max-w-xl mb-12">
                 The centralized platform for marketplace operations, inventory synchronization, and automated cataloging for 200+ global brands.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="h-[60px] rounded-full bg-enterprise-text text-white px-10 text-[14px] font-bold uppercase tracking-widest hover:bg-enterprise-green hover:text-enterprise-text transition-all shadow-xl shadow-enterprise-text/10">
+                <Button size="lg" className="w-full sm:w-auto">
                   Get Started
                 </Button>
-                <Link href="/contact" className="h-[60px] flex items-center px-10 border border-enterprise-border rounded-full text-[14px] font-bold uppercase tracking-widest text-enterprise-text hover:bg-enterprise-bg transition-all">
+                <Link href="/contact" className="h-[54px] flex items-center px-10 border border-enterprise-border rounded-full text-[13px] font-bold uppercase tracking-widest text-enterprise-text hover:bg-enterprise-bg transition-all w-full sm:w-auto justify-center">
                   Book a Demo
                 </Link>
               </div>
             </div>
             
             <div className="lg:col-span-5 flex flex-col gap-10 lg:pt-16">
-              <div className="p-8 rounded-[32px] bg-enterprise-bg border border-enterprise-border">
+              <div className="p-6 md:p-8 rounded-[32px]">
                 <p className="text-[11px] font-bold text-enterprise-text-muted uppercase tracking-widest mb-6">Operational Performance</p>
                 <div className="space-y-6">
                   {[
@@ -57,7 +57,7 @@ export function HeroSection() {
 
           {/* Middle Layer: Ecosystem Visualization */}
           <div className="relative">
-             <div className="h-[400px] md:h-[600px] rounded-[48px] bg-enterprise-text overflow-hidden relative shadow-2xl">
+             <div className="relative w-full aspect-[16/10] md:aspect-[16/9]">
                 <div className="absolute inset-0 opacity-[0.05] grid-subtle pointer-events-none" />
                 
                 {/* Clean Ecosystem Visual */}
@@ -66,7 +66,7 @@ export function HeroSection() {
                     src="/images/Frame 163 (1).svg"
                     alt="Marketplace Orchestration"
                     fill
-                    className="object-cover opacity-80"
+                    className="object-contain"
                     priority
                   />
                 </div>
@@ -74,18 +74,18 @@ export function HeroSection() {
                 <div className="absolute bottom-12 left-12 right-12 flex items-center justify-between z-10 pointer-events-none">
                    <div className="flex gap-4">
                       {["Inventory Sync", "Order Orchestration", "Catalog Intelligence"].map(tag => (
-                        <span key={tag} className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">{tag}</span>
+                        <span key={tag} className="px-4 py-2 rounded-full bg-white/50 backdrop-blur-md text-[10px] font-bold text-enterprise-text uppercase tracking-widest">{tag}</span>
                       ))}
                    </div>
                    <div className="flex items-center gap-3">
                       <div className="h-2 w-2 rounded-full bg-enterprise-green animate-pulse" />
-                      <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">Systems Operational</span>
+                      <span className="text-[10px] font-bold text-enterprise-text-muted uppercase tracking-widest">Systems Operational</span>
                    </div>
                 </div>
              </div>
              
              {/* Floating Trust Card */}
-             <div className="absolute -top-12 -right-6 hidden lg:block w-72 p-8 rounded-[32px] bg-white shadow-2xl border border-enterprise-border animate-float">
+             <div className="absolute -top-12 -right-6 hidden lg:block w-72 p-8 rounded-[32px] bg-white/80 backdrop-blur-xl border border-white shadow-2xl shadow-black/5 animate-float">
                 <p className="text-[11px] font-bold text-enterprise-text-muted uppercase tracking-widest mb-4">Enterprise Growth</p>
                 <p className="text-4xl font-bold tracking-tighter mb-2">3X <span className="text-lg text-enterprise-green">+</span></p>
                 <p className="text-[12px] font-medium text-enterprise-text-muted leading-snug">Average revenue velocity increase for ISNAP partners.</p>

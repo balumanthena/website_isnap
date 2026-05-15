@@ -18,7 +18,6 @@ const servicesLinks: FooterLink[] = [
 
 const companyLinks: FooterLink[] = [
   { label: "About", href: "/about" },
-  { label: "How It Works", href: "/how-it-works" },
   { label: "Industries", href: "/industries" },
   { label: "Contact", href: "/contact" }
 ];
@@ -74,7 +73,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
 
 export function Footer() {
   return (
-    <footer className="relative bg-enterprise-text pt-40 pb-20 text-white overflow-hidden">
+    <footer className="relative bg-enterprise-text pt-20 pb-16 text-white overflow-hidden">
       {/* Structural Anchor */}
       <div className="absolute inset-0 grid-subtle opacity-[0.05] pointer-events-none" />
       

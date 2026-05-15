@@ -118,12 +118,12 @@ export function ServiceHero({ title, subtitle, description, image, stats }: Serv
             )}
           </div>
           <div className="lg:col-span-5 relative">
-             <div className="aspect-[4/5] rounded-[48px] bg-enterprise-text overflow-hidden relative shadow-2xl">
+             <div className="aspect-[4/5] rounded-[48px] bg-white overflow-hidden relative shadow-2xl border border-enterprise-border">
                 <div className="absolute inset-0 opacity-[0.1] grid-subtle" />
                 {image && (
-                  <Image src={image} alt={title} fill className="object-cover opacity-80" priority />
+                  <Image src={image} alt={title} fill className="object-cover" priority />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-enterprise-text via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent" />
              </div>
           </div>
         </div>

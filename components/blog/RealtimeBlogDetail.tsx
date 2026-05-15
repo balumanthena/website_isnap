@@ -17,6 +17,15 @@ interface RealtimeBlogDetailProps {
 export function RealtimeBlogDetail({ slug, initialBlog }: RealtimeBlogDetailProps) {
   const blog = useRealtimeBlog(slug, initialBlog);
   const [progress, setProgress] = useState(0);
+  const [isHydrating, setIsHydrating] = useState(!initialBlog);
+
+  useEffect(() => {
+    if (isHydrating && blog !== undefined) {
+      // Small timeout to allow Firebase to return first snapshot
+      const timer = setTimeout(() => setIsHydrating(false), 800);
+      return () => clearTimeout(timer);
+    }
+  }, [blog, isHydrating]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +39,15 @@ export function RealtimeBlogDetail({ slug, initialBlog }: RealtimeBlogDetailProp
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (isHydrating) {
+    return (
+      <div className="text-center py-32 flex flex-col items-center justify-center min-h-[50vh]">
+        <div className="w-6 h-6 border-2 border-gray-200 border-t-enterprise-text rounded-full animate-spin mb-4" />
+        <h2 className="text-lg font-medium text-gray-500">Loading editorial content...</h2>
+      </div>
+    );
+  }
 
   if (!blog || !blog.published) {
     return (
@@ -96,7 +114,7 @@ export function RealtimeBlogDetail({ slug, initialBlog }: RealtimeBlogDetailProp
         {/* Cover Image */}
         {blog.coverImage && (
           <div className="max-w-6xl mx-auto px-6 md:px-12 mb-20">
-            <div className="aspect-video w-full rounded-[40px] overflow-hidden bg-gray-100 shadow-premium">
+            <div className="aspect-video w-full rounded-[40px] overflow-hidden bg-white shadow-premium">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={blog.coverImage} 

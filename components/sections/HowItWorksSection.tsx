@@ -90,10 +90,10 @@ export function HowItWorksSection() {
                          <div className="h-px w-8 bg-enterprise-green" />
                          <span className="text-[11px] font-bold uppercase tracking-widest text-enterprise-green">Velocity Metric</span>
                       </div>
-                      <h3 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 leading-tight max-w-xl">
+                      <h3 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 leading-tight max-w-xl text-white">
                          Scale across all channels in <span className="text-enterprise-green">under 48 hours.</span>
                       </h3>
-                      <p className="text-white/40 text-lg leading-relaxed max-w-2xl">
+                      <p className="text-white/60 text-lg leading-relaxed max-w-2xl">
                          Our automated catalog mapping allows for rapid, compliant deployment across India&apos;s largest marketplaces with zero manual overhead.
                       </p>
                    </div>

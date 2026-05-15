@@ -20,26 +20,28 @@ const BLOGS_COLLECTION = "blogs";
 export async function getPublishedBlogs(limitCount = 50) {
   const q = query(
     collection(db, BLOGS_COLLECTION),
-    where("published", "==", true),
     orderBy("createdAt", "desc"),
     limit(limitCount)
   );
   
   const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blog));
+  return snapshot.docs
+    .map(doc => ({ id: doc.id, ...doc.data() } as Blog))
+    .filter(blog => blog.published);
 }
 
 export async function getFeaturedBlogs() {
   const q = query(
     collection(db, BLOGS_COLLECTION),
-    where("published", "==", true),
-    where("featured", "==", true),
     orderBy("createdAt", "desc"),
-    limit(3)
+    limit(20) // Get more to find featured ones
   );
   
   const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blog));
+  return snapshot.docs
+    .map(doc => ({ id: doc.id, ...doc.data() } as Blog))
+    .filter(blog => blog.published && blog.featured)
+    .slice(0, 3);
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
@@ -61,7 +63,6 @@ export async function getAllBlogsForAdmin() {
     collection(db, BLOGS_COLLECTION),
     orderBy("createdAt", "desc")
   );
-  
   const snapshot = await getDocs(q);
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blog));
 }

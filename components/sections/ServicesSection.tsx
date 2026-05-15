@@ -32,27 +32,27 @@ export function ServicesSection() {
           </div>
 
           {/* Infrastructure Matrix: Layered Architecture Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
             <div className="lg:col-span-12">
-               <div className="enterprise-card bg-enterprise-bg/20 p-1.5 border border-enterprise-border overflow-hidden">
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-1.5">
+               <div className="enterprise-card bg-enterprise-bg/20 p-1 md:p-1.5 border border-enterprise-border overflow-hidden">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-1 md:gap-1.5">
                      {infrastructureCapabilities.map((group) => (
-                       <div key={group.group} className="bg-white rounded-[14px] p-10 border border-enterprise-border flex flex-col hover:bg-enterprise-bg/20 transition-all">
-                          <div className="flex items-center justify-between mb-12">
+                       <div key={group.group} className="bg-white rounded-[14px] p-6 md:p-10 border border-enterprise-border flex flex-col hover:bg-enterprise-bg/20 transition-all">
+                          <div className="flex items-center justify-between mb-8 md:mb-12">
                              <h3 className="text-[10px] font-bold text-enterprise-text uppercase tracking-[0.3em]">{group.group} Infrastructure</h3>
-                             <div className="h-1.5 w-8 bg-enterprise-bg rounded-full" />
+                             <div className="h-1 w-6 md:h-1.5 md:w-8 bg-enterprise-bg rounded-full" />
                           </div>
                           
-                          <div className="space-y-4 flex-1">
+                          <div className="space-y-3 md:space-y-4 flex-1">
                              {group.nodes.map((node) => (
-                               <div key={node} className="flex items-center justify-between p-4 rounded-lg border border-enterprise-border bg-white group hover:border-enterprise-green transition-all cursor-default">
-                                  <span className="text-[13px] font-bold text-enterprise-text group-hover:text-enterprise-green transition-colors">{node}</span>
+                               <div key={node} className="flex items-center justify-between p-3 md:p-4 rounded-xl border border-enterprise-border bg-white group hover:border-enterprise-green transition-all cursor-default">
+                                  <span className="text-[12px] md:text-[13px] font-bold text-enterprise-text group-hover:text-enterprise-green transition-colors">{node}</span>
                                   <div className="h-1.5 w-1.5 rounded-full bg-enterprise-bg group-hover:bg-enterprise-green transition-all" />
                                </div>
                              ))}
                           </div>
 
-                          <div className="mt-12 pt-8 border-t border-enterprise-border flex items-center justify-between">
+                          <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-enterprise-border flex items-center justify-between">
                              <span className="text-[9px] font-mono text-enterprise-text-muted">ID: CAP_{group.group.toUpperCase()}</span>
                              <div className="flex gap-1">
                                 {Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-1 w-1 rounded-full bg-enterprise-border" />)}

@@ -53,11 +53,11 @@ export function IndustriesSection() {
                    <div className="space-y-12">
                       <div>
                          <p className="text-5xl font-bold tracking-tighter">200+</p>
-                         <p className="mt-3 text-[12px] font-bold uppercase tracking-widest text-white/40">Global Brand Portfolios</p>
+                         <p className="mt-3 text-[12px] font-bold uppercase tracking-widest text-white/70">Global Brand Portfolios</p>
                       </div>
                       <div>
                          <p className="text-5xl font-bold tracking-tighter">12+</p>
-                         <p className="mt-3 text-[12px] font-bold uppercase tracking-widest text-white/40">Core Industry Verticals</p>
+                         <p className="mt-3 text-[12px] font-bold uppercase tracking-widest text-white/70">Core Industry Verticals</p>
                       </div>
                    </div>
                 </div>

@@ -22,14 +22,18 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://isnap.ai")
 };
 
+import { AuthProvider } from "@/lib/auth-context";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} min-h-screen bg-enterprise-bg font-sans text-enterprise-text antialiased selection:bg-enterprise-lime/30 selection:text-enterprise-text`}
       >
-        <div className="institutional-bg" />
-        {children}
+        <AuthProvider>
+          <div className="institutional-bg" />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

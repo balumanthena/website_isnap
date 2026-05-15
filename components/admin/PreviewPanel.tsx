@@ -110,11 +110,11 @@ export function PreviewPanel({ data, onClose }: PreviewPanelProps) {
 
                <div className="h-full overflow-y-auto overflow-x-hidden custom-scrollbar bg-white">
                   {/* Hero Experience */}
-                  <div className="aspect-[21/9] w-full bg-zinc-50 relative overflow-hidden">
+                  <div className="aspect-[21/9] w-full bg-white relative overflow-hidden">
                      {data.coverImage ? (
                         <img src={data.coverImage} alt="Cover" className="w-full h-full object-cover" />
                      ) : (
-                        <div className="h-full w-full flex items-center justify-center bg-zinc-100">
+                        <div className="h-full w-full flex items-center justify-center bg-white">
                            <Globe className="w-16 h-16 text-zinc-200" />
                         </div>
                      )}
@@ -195,7 +195,7 @@ export function PreviewPanel({ data, onClose }: PreviewPanelProps) {
                   <div className="px-6 pb-4">
                      <p className="text-xs text-zinc-600 line-clamp-3 leading-relaxed">{data.excerpt}</p>
                   </div>
-                  <div className="aspect-[1.91/1] w-full bg-zinc-50 relative group cursor-pointer">
+                  <div className="aspect-[1.91/1] w-full bg-white relative group cursor-pointer">
                      {data.coverImage && <img src={data.coverImage} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />}
                      <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                      <div className="absolute bottom-0 left-0 right-0 p-5 bg-white/90 backdrop-blur-xl border-t border-zinc-100">

@@ -21,13 +21,14 @@ export function useRealtimeBlogs(initialBlogs: Blog[], limitCount = 50) {
   useEffect(() => {
     const q = query(
       collection(db, BLOGS_COLLECTION),
-      where("published", "==", true),
       orderBy("createdAt", "desc"),
       limit(limitCount)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const liveBlogs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blog));
+      const liveBlogs = snapshot.docs
+        .map(doc => ({ id: doc.id, ...doc.data() } as Blog))
+        .filter(blog => blog.published);
       setBlogs(liveBlogs);
     });
 
@@ -43,14 +44,15 @@ export function useRealtimeFeaturedBlogs(initialBlogs: Blog[]) {
   useEffect(() => {
     const q = query(
       collection(db, BLOGS_COLLECTION),
-      where("published", "==", true),
-      where("featured", "==", true),
       orderBy("createdAt", "desc"),
-      limit(3)
+      limit(50)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const liveBlogs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blog));
+      const liveBlogs = snapshot.docs
+        .map(doc => ({ id: doc.id, ...doc.data() } as Blog))
+        .filter(blog => blog.published && blog.featured)
+        .slice(0, 3);
       setBlogs(liveBlogs);
     });
 
@@ -64,19 +66,12 @@ export function useRealtimeBlog(slug: string, initialBlog: Blog | null) {
   const [blog, setBlog] = useState<Blog | null>(initialBlog);
 
   useEffect(() => {
-    const q = query(
-      collection(db, BLOGS_COLLECTION),
-      where("slug", "==", slug),
-      limit(1)
-    );
+    const q = query(collection(db, BLOGS_COLLECTION));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      if (snapshot.empty) {
-        setBlog(null);
-      } else {
-        const doc = snapshot.docs[0];
-        setBlog({ id: doc.id, ...doc.data() } as Blog);
-      }
+      const allBlogs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blog));
+      const found = allBlogs.find(b => b.slug === slug);
+      setBlog(found || null);
     });
 
     return () => unsubscribe();

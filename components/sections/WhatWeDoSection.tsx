@@ -79,7 +79,7 @@ export function WhatWeDoSection() {
       <div className="absolute inset-0 grid-subtle opacity-[0.4] pointer-events-none" />
       
       <div className="max-container relative z-10">
-        <div className="flex flex-col gap-24">
+        <div className="flex flex-col gap-16">
           {/* Header Layer */}
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-enterprise-border bg-enterprise-bg px-4 py-1.5 mb-10">

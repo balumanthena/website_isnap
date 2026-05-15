@@ -166,7 +166,7 @@ export function MediaLibrary({ isOpen, onClose, onSelect }: MediaLibraryProps) {
                  </div>
                ) : assets.length === 0 ? (
                  <div className="h-full flex flex-col items-center justify-center gap-8 text-center opacity-60">
-                    <div className="h-32 w-32 bg-zinc-50 rounded-[3rem] flex items-center justify-center border border-zinc-100">
+                    <div className="h-32 w-32 bg-white rounded-[3rem] flex items-center justify-center border border-zinc-100">
                        <ImageIcon className="w-12 h-12 text-zinc-200" />
                     </div>
                     <div className="space-y-2">
@@ -193,7 +193,7 @@ export function MediaLibrary({ isOpen, onClose, onSelect }: MediaLibraryProps) {
                         } as any)}
                       >
                          <div className={cn(
-                           "relative overflow-hidden bg-zinc-50 rounded-[2rem] border border-zinc-100 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-black/10 group-hover:-translate-y-2",
+                           "relative overflow-hidden bg-white rounded-[2rem] border border-zinc-100 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-black/10 group-hover:-translate-y-2",
                            viewMode === "grid" ? "aspect-square" : "h-20 w-20 shrink-0"
                          )}>
                             <CldImage 

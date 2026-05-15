@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function CTASection() {
   return (
-    <section className="relative bg-enterprise-text py-40 md:py-60 overflow-hidden">
+    <section className="relative bg-enterprise-text py-20 md:py-28 overflow-hidden">
       {/* Background Architectural Grid */}
       <div className="absolute inset-0 opacity-[0.1] grid-subtle pointer-events-none" />
       

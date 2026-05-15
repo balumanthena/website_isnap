@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useScrollPosition } from "@/hooks/use-scroll-position";
@@ -18,7 +18,13 @@ import {
   SparklesIcon,
   PaintBrushIcon,
   CodeBracketIcon,
-  ShoppingBagIcon
+  ShoppingBagIcon,
+  Squares2X2Icon,
+  BuildingOfficeIcon,
+  NewspaperIcon,
+  UserGroupIcon,
+  EnvelopeIcon,
+  ArrowRightIcon
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import { LogoMark } from "@/components/LogoMark";
@@ -50,6 +56,21 @@ const megaMenuData = [
   }
 ];
 
+const mobileNavItems = [
+  { label: "Solutions", href: "/services", icon: Squares2X2Icon },
+  { label: "Industries", href: "/#industries", icon: BuildingOfficeIcon },
+  { label: "Insights", href: "/blogs", icon: NewspaperIcon },
+  { label: "About", href: "/about", icon: UserGroupIcon },
+  { label: "Contact", href: "/contact", icon: EnvelopeIcon },
+];
+
+function LinkedInIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+      <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-2 6.75h4V21h-4V10.25ZM10 10.25h3.83v1.47h.06c.53-1.01 1.84-2.07 3.8-2.07 4.06 0 4.81 2.48 4.81 5.71V21h-4v-4.95c0-1.18-.03-2.7-1.78-2.7s-2.05 1.29-2.05 2.62V21h-4V10.25Z" />
+    </svg>
+  );
+}
 
 function MegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -117,87 +138,161 @@ export function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const MotionDiv = motion.div as any;
 
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileOpen]);
+
   return (
-    <nav className={cn(
-      "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
-      isScrolled ? "py-4 bg-white/80 backdrop-blur-xl border-b border-enterprise-border shadow-enterprise-nav" : "py-8 bg-transparent"
-    )}>
-      <div className="max-container flex items-center justify-between">
-        <Link href="/" className="transition-opacity hover:opacity-80">
-          <LogoMark />
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-16 h-full">
-          <MegaMenu />
-          <Link href="/how-it-works" className="text-[12px] font-bold uppercase tracking-[0.2em] text-enterprise-text hover:text-enterprise-green transition-colors">Methodology</Link>
-          <Link href="/blogs" className="text-[12px] font-bold uppercase tracking-[0.2em] text-enterprise-text hover:text-enterprise-green transition-colors">Editorial</Link>
-          <Link href="/contact" className="text-[12px] font-bold uppercase tracking-[0.2em] text-enterprise-text hover:text-enterprise-green transition-colors">Contact</Link>
-        </div>
-
-        <div className="hidden lg:flex items-center">
-          <Link href="/get-started">
-            <Button className="h-[54px] px-10 rounded-full bg-enterprise-text text-white text-[12px] font-bold uppercase tracking-widest hover:bg-enterprise-green hover:text-enterprise-text transition-all shadow-xl shadow-enterprise-text/10">
-              Get Started
-            </Button>
+    <>
+      <nav className={cn(
+        "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
+        isScrolled ? "py-4 bg-white/80 backdrop-blur-xl border-b border-enterprise-border shadow-enterprise-nav" : "py-8 bg-transparent"
+      )}>
+        <div className="max-container flex items-center justify-between">
+          <Link href="/" className="transition-opacity hover:opacity-80">
+            <LogoMark className="h-9" />
           </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-16 h-full">
+            <MegaMenu />
+            <Link href="/about" className="text-[12px] font-bold uppercase tracking-[0.2em] text-enterprise-text hover:text-enterprise-green transition-colors">About</Link>
+            <Link href="/blogs" className="text-[12px] font-bold uppercase tracking-[0.2em] text-enterprise-text hover:text-enterprise-green transition-colors">Editorial</Link>
+            <Link href="/contact" className="text-[12px] font-bold uppercase tracking-[0.2em] text-enterprise-text hover:text-enterprise-green transition-colors">Contact</Link>
+          </div>
+
+          <div className="hidden lg:flex items-center">
+            <Link href="/get-started">
+              <Button size="lg">
+                Get Started
+              </Button>
+            </Link>
+          </div>
+
+          {/* Mobile Toggle */}
+          <button 
+            className="lg:hidden p-2 text-enterprise-text group relative"
+            onClick={() => setIsMobileOpen(true)}
+          >
+            <Bars3Icon className="h-6 w-6" />
+            <div className="absolute inset-0 bg-enterprise-text/5 scale-0 group-hover:scale-100 rounded-full transition-transform" />
+          </button>
         </div>
+      </nav>
 
-        {/* Mobile Toggle */}
-        <button 
-          className="lg:hidden p-2 text-enterprise-text"
-          onClick={() => setIsMobileOpen(true)}
-        >
-          <Bars3Icon className="h-6 w-6" />
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
+      {/* Mobile Drawer Navigation */}
       <AnimatePresence>
         {isMobileOpen && (
-          <MotionDiv
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            className="fixed inset-0 z-[200] bg-white p-10 flex flex-col"
-          >
-            <div className="flex items-center justify-between mb-20">
-              <LogoMark />
-              <button onClick={() => setIsMobileOpen(false)}>
-                <XMarkIcon className="h-8 w-8 text-enterprise-text" />
-              </button>
-            </div>
+          <>
+            {/* Backdrop */}
+            <MotionDiv
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileOpen(false)}
+              className="fixed inset-0 z-[150] bg-enterprise-text/40 backdrop-blur-sm"
+            />
 
-            <div className="flex-1 overflow-y-auto space-y-16">
-              {megaMenuData.map(category => (
-                <div key={category.title} className="space-y-8">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-enterprise-green">{category.title}</p>
-                  <div className="space-y-8">
-                    {category.items.map((item) => (
+            <MotionDiv
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 220 }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.05}
+              onDragEnd={(_: any, info: any) => {
+                if (info.offset.x > 100) setIsMobileOpen(false);
+              }}
+              className="fixed inset-y-0 right-0 z-[200] w-[88vw] bg-white/95 backdrop-blur-2xl p-6 flex flex-col shadow-premium-lg border-l border-white/20 rounded-l-[40px] overflow-hidden"
+            >
+              {/* Drawer Top Section */}
+              <div className="flex items-center justify-between mb-8 pb-6 border-b border-enterprise-border/50">
+                <LogoMark className="h-8" />
+                <button 
+                  onClick={() => setIsMobileOpen(false)}
+                  className="p-3 bg-enterprise-text/5 hover:bg-enterprise-text/10 rounded-full transition-colors group"
+                >
+                  <XMarkIcon className="h-6 w-6 text-enterprise-text group-hover:rotate-90 transition-transform duration-300" />
+                </button>
+              </div>
+
+              {/* Company Statement */}
+              <div className="mb-10 px-2">
+                <p className="text-[13px] font-medium text-enterprise-text-muted leading-relaxed">
+                  Institutional-grade marketplace infrastructure for high-growth brands in India.
+                </p>
+              </div>
+
+              {/* Navigation Sections */}
+              <div className="flex-1 overflow-y-auto custom-scrollbar -mx-2 px-2 pb-12">
+                <div className="space-y-2">
+                  {mobileNavItems.map((item, index) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 + 0.1 }}
+                    >
                       <Link
-                        key={item.label}
                         href={item.href}
-                        className="block text-2xl font-bold text-enterprise-text tracking-tight hover:text-enterprise-green transition-colors"
+                        className="flex items-center justify-between p-4 rounded-2xl hover:bg-enterprise-text/[0.03] transition-all group active:scale-[0.98]"
                         onClick={() => setIsMobileOpen(false)}
                       >
-                        {item.label}
+                        <div className="flex items-center gap-4">
+                          <div className="h-10 w-10 rounded-xl bg-enterprise-bg border border-enterprise-border flex items-center justify-center text-enterprise-text-muted group-hover:text-enterprise-green group-hover:border-enterprise-green/30 transition-all">
+                            <item.icon className="h-5 w-5" />
+                          </div>
+                          <span className="text-lg font-bold text-enterprise-text tracking-tight group-hover:translate-x-1 transition-transform">{item.label}</span>
+                        </div>
+                        <ArrowRightIcon className="h-4 w-4 text-enterprise-text/20 group-hover:text-enterprise-green group-hover:translate-x-1 transition-all" />
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Additional Trust Badge in Menu */}
+                <div className="mt-12 p-6 rounded-3xl bg-enterprise-green/5 border border-enterprise-green/10">
+                   <div className="flex items-center gap-2 mb-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-enterprise-green animate-pulse" />
+                      <span className="text-[10px] font-bold text-enterprise-green uppercase tracking-widest">Global Operations</span>
+                   </div>
+                   <p className="text-[12px] font-bold text-enterprise-text mb-1">Systems Active</p>
+                   <p className="text-[11px] text-enterprise-text-muted leading-snug">Monitoring 2.4k+ marketplace nodes across India.</p>
+                </div>
+              </div>
+
+              {/* Drawer Bottom Section */}
+              <div className="mt-auto pt-8 border-t border-enterprise-border">
+                <div className="flex items-center justify-between mb-8 px-2">
+                  <div className="flex gap-4">
+                    {[LinkedInIcon].map((Icon, i) => (
+                      <Link key={i} href="#" className="h-10 w-10 rounded-full bg-enterprise-bg flex items-center justify-center text-enterprise-text-muted hover:text-enterprise-green transition-all">
+                        <Icon />
                       </Link>
                     ))}
                   </div>
+                  <Link href="mailto:support@isnap.in" className="text-[11px] font-bold text-enterprise-text-muted hover:text-enterprise-text transition-colors">support@isnap.in</Link>
                 </div>
-              ))}
-            </div>
 
-            <div className="mt-12 pt-12 border-t border-enterprise-border">
-              <Link href="/get-started" onClick={() => setIsMobileOpen(false)}>
-                <Button className="h-16 w-full rounded-full bg-enterprise-text text-white font-bold uppercase tracking-widest text-sm">
-                  Get Started
-                </Button>
-              </Link>
-            </div>
-          </MotionDiv>
+                <Link href="/get-started" onClick={() => setIsMobileOpen(false)}>
+                  <Button className="w-full h-[58px] rounded-2xl bg-enterprise-text text-white font-bold uppercase tracking-[0.1em] text-[13px] shadow-premium hover:bg-enterprise-green hover:text-enterprise-text transition-all active:scale-[0.98]">
+                    Start Building With ISNAP
+                  </Button>
+                </Link>
+              </div>
+            </MotionDiv>
+          </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }

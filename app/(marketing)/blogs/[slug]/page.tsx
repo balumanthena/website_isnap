@@ -9,12 +9,14 @@ interface Props {
   params: { slug: string };
 }
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const dynamic = "force-dynamic";
+export const revalidate = 0; // Disable revalidation for dynamic pages
 
 export async function generateMetadata(
-  { params }: Props,
+  props: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const params = await props.params;
   const blog = await getBlogBySlug(params.slug);
 
   if (!blog) {
@@ -45,24 +47,18 @@ export async function generateMetadata(
   };
 }
 
-export async function generateStaticParams() {
-  const blogs = await getPublishedBlogs(100);
-  return blogs.map((blog) => ({
-    slug: blog.slug,
-  }));
-}
+export default async function BlogPostPage(props: Props) {
+  const { slug } = await props.params;
+  const blog = await getBlogBySlug(slug);
 
-export default async function BlogPostPage({ params }: Props) {
-  const blog = await getBlogBySlug(params.slug);
-
-  if (!blog || !blog.published) {
-    notFound();
-  }
+  // Bypass server-side notFound to allow client-side Firebase SDK to fetch
+  // if (!blog || !blog.published) {
+  //   notFound();
+  // }
 
   return (
     <main className="bg-white min-h-screen pt-32">
-      <RealtimeBlogDetail slug={params.slug} initialBlog={blog} />
-
+      <RealtimeBlogDetail slug={slug} initialBlog={blog as any} />
       <CTASection />
     </main>
   );

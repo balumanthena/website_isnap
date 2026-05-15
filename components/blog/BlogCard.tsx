@@ -15,7 +15,7 @@ export function BlogCard({ blog, featured = false }: BlogCardProps) {
     <Link href={`/blogs/${blog.slug}`} className="group block">
       <article className={`relative flex ${isLarge ? "flex-col lg:flex-row gap-8 lg:gap-16 items-center" : "flex-col gap-6"}`}>
         {/* Image Container */}
-        <div className={`relative rounded-[32px] overflow-hidden bg-gray-100 ${isLarge ? "w-full lg:w-3/5 aspect-video lg:aspect-[4/3]" : "w-full aspect-[4/3]"}`}>
+        <div className={`relative rounded-[32px] overflow-hidden bg-white ${isLarge ? "w-full lg:w-3/5 aspect-video lg:aspect-[4/3]" : "w-full aspect-[4/3]"}`}>
           {blog.coverImage ? (
             <img 
               src={blog.coverImage} 
@@ -23,7 +23,7 @@ export function BlogCard({ blog, featured = false }: BlogCardProps) {
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white to-white" />
           )}
           <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
         </div>
@@ -48,7 +48,7 @@ export function BlogCard({ blog, featured = false }: BlogCardProps) {
             {blog.excerpt}
           </p>
 
-          <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-100">
+          <div className="mt-auto flex items-center justify-between pt-6 border-t border-white">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-enterprise-text text-white flex items-center justify-center text-xs font-bold">
                 {blog.author.name.charAt(0)}
@@ -61,7 +61,7 @@ export function BlogCard({ blog, featured = false }: BlogCardProps) {
               </div>
             </div>
 
-            <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-enterprise-text transition-colors duration-300">
+            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center group-hover:bg-enterprise-text transition-colors duration-300">
               <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
             </div>
           </div>

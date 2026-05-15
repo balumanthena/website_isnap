@@ -13,19 +13,17 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-primary-600 text-white hover:bg-primary-500 focus-visible:ring-primary-600",
-  secondary:
-    "border border-primary-600 bg-white text-primary-600 hover:bg-primary-50 focus-visible:ring-primary-600",
-  outline:
-    "border border-primary-600 bg-white text-primary-600 hover:bg-primary-50 focus-visible:ring-primary-600",
-  ghost: "bg-transparent text-slate-700 hover:bg-slate-100 focus-visible:ring-slate-300",
-  destructive: "bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-600"
+  primary: "bg-enterprise-text text-white hover:bg-enterprise-green hover:text-enterprise-text shadow-premium",
+  secondary: "bg-enterprise-bg text-enterprise-text border border-enterprise-border hover:bg-enterprise-text hover:text-white",
+  outline: "border border-enterprise-border bg-transparent text-enterprise-text hover:bg-enterprise-bg",
+  ghost: "bg-transparent text-enterprise-text-muted hover:bg-enterprise-bg hover:text-enterprise-text",
+  destructive: "bg-red-500 text-white hover:bg-red-600"
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "h-9 px-3 text-sm",
-  md: "h-11 px-4 text-sm",
-  lg: "h-12 px-6 text-base"
+  sm: "h-9 px-4 text-[11px] font-bold uppercase tracking-widest",
+  md: "h-12 px-6 text-[12px] font-bold uppercase tracking-widest",
+  lg: "h-[54px] px-10 text-[13px] font-bold uppercase tracking-widest rounded-full"
 };
 
 function Spinner() {

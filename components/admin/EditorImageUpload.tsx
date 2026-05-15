@@ -94,7 +94,7 @@ export function EditorImageUpload({ isOpen, onClose, onInsert }: EditorImageUplo
             <>
               {preview ? (
                 <div className="space-y-4">
-                  <div className="relative rounded-lg overflow-hidden bg-gray-50 border border-gray-200">
+                  <div className="relative rounded-lg overflow-hidden bg-white border border-gray-200">
                     <img src={preview} alt="Preview" className="w-full max-h-[300px] object-contain" />
                     <button
                       onClick={() => setPreview(null)}
@@ -142,7 +142,7 @@ export function EditorImageUpload({ isOpen, onClose, onInsert }: EditorImageUplo
                         </>
                       ) : (
                         <>
-                          <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                          <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-gray-100">
                             <Upload className="w-5 h-5 text-gray-400" />
                           </div>
                           <div>
@@ -184,7 +184,7 @@ export function EditorImageUpload({ isOpen, onClose, onInsert }: EditorImageUplo
                 />
               </div>
               {urlInput && (
-                <div className="rounded-lg overflow-hidden bg-gray-50 border border-gray-200">
+                <div className="rounded-lg overflow-hidden bg-white border border-gray-200">
                   <img src={urlInput} alt="Preview" className="w-full max-h-[200px] object-contain" onError={(e) => (e.currentTarget.style.display = "none")} />
                 </div>
               )}

@@ -29,19 +29,19 @@ export function ImageUploader({ value, onChange, folder = "isnap_media", classNa
   return (
     <div className={cn("w-full group", className)}>
       {value ? (
-        <div className="relative rounded-lg overflow-hidden bg-gray-100 aspect-[2/1] w-full border border-gray-200">
+        <div className="relative rounded-lg overflow-hidden bg-white aspect-[2/1] w-full border border-gray-200">
           <CldImage 
             src={value} 
             width={1440}
             height={720}
             alt="Cover image" 
-            className="w-full h-full object-cover"
-            crop="fill"
-            gravity="auto"
+            className="w-full h-full object-contain"
+            crop="pad"
+            background="white"
           />
           
           {/* Hover Controls */}
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2">
+          <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2">
             <CldUploadWidget 
               uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
               onSuccess={handleSuccess}
@@ -62,7 +62,7 @@ export function ImageUploader({ value, onChange, folder = "isnap_media", classNa
             <button
               type="button"
               onClick={() => onChange("")}
-              className="h-8 w-8 bg-white text-red-500 rounded-md hover:bg-red-50 transition-colors flex items-center justify-center"
+              className="h-8 w-8 bg-white text-red-500 rounded-md hover:bg-red-50 transition-colors flex items-center justify-center shadow-md"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -92,7 +92,7 @@ export function ImageUploader({ value, onChange, folder = "isnap_media", classNa
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center">
                     <ImageIcon className="w-5 h-5 text-gray-400" />
                   </div>
                   <div>

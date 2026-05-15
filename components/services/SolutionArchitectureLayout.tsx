@@ -46,7 +46,7 @@ export function SolutionArchitectureLayout({
   return (
     <main className="bg-white">
       {/* 1. Cinematic Solution Hero */}
-      <section className="relative pt-40 pb-32 md:pt-60 md:pb-48 overflow-hidden">
+      <section className="relative pt-24 pb-20 md:pt-32 md:pb-24 overflow-hidden">
         <div className="absolute inset-0 grid-subtle opacity-[0.4] pointer-events-none" />
         
         <div className="max-container relative z-10">
@@ -98,20 +98,20 @@ export function SolutionArchitectureLayout({
                  initial={{ opacity: 0, scale: 0.95 }}
                  animate={{ opacity: 1, scale: 1 }}
                  transition={{ duration: 0.8, ease: "easeOut" }}
-                 className="relative aspect-[4/5] rounded-[64px] bg-enterprise-text overflow-hidden shadow-2xl group"
+                 className="relative aspect-[4/5] rounded-[64px] bg-white overflow-hidden shadow-2xl group border border-enterprise-border"
                >
                   <div className="absolute inset-0 opacity-[0.1] grid-subtle pointer-events-none" />
-                  <Image src={heroImage} alt={title} fill className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-[2s]" priority />
-                  <div className="absolute inset-0 bg-gradient-to-t from-enterprise-text via-transparent to-transparent opacity-80" />
+                  <Image src={heroImage} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-[2s]" priority />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-transparent opacity-80" />
                   
                   {/* Floating Metric */}
-                  <div className="absolute bottom-10 left-10 right-10 p-8 rounded-[32px] bg-white/5 backdrop-blur-xl border border-white/10">
+                  <div className="absolute bottom-10 left-10 right-10 p-8 rounded-[32px] bg-white/80 backdrop-blur-xl border border-enterprise-border shadow-lg">
                      <div className="grid grid-cols-2 gap-8">
                         {metrics.slice(0, 2).map(m => (
                           <div key={m.label}>
-                             <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">{m.label}</p>
+                             <p className="text-[10px] font-bold text-enterprise-text/40 uppercase tracking-widest mb-2">{m.label}</p>
                              <div className="flex items-end gap-2">
-                                <p className="text-3xl font-bold text-white">{m.value}</p>
+                                <p className="text-3xl font-bold text-enterprise-text">{m.value}</p>
                                 {m.trend && <span className="text-[10px] font-bold text-enterprise-green mb-1">{m.trend}</span>}
                              </div>
                           </div>
