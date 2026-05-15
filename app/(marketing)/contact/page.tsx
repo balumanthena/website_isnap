@@ -67,221 +67,210 @@ export default function ContactPage() {
     }
   };
 
+  const MotionDiv = motion.div as any;
+
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-50/50">
-      {/* Abstract Background Element */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-[0.03]">
-        <div className="absolute top-[10%] right-[5%] w-[500px] h-[500px] rounded-full bg-black blur-[120px]" />
-        <div className="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full bg-black blur-[100px]" />
-      </div>
-
-      <div className="container relative mx-auto px-6 max-w-7xl">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+    <section className="relative pt-32 pb-24 overflow-hidden bg-white">
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 grid-subtle opacity-[0.5] pointer-events-none" />
+      
+      <div className="max-container relative z-10">
+        <div className="grid lg:grid-cols-12 gap-24 items-start">
           
-          {/* LEFT: Contact Information Card */}
-          <motion.div
-            {...({
-              initial: { opacity: 0, x: -20 },
-              animate: { opacity: 1, x: 0 },
-              transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-              className: "lg:col-span-5 space-y-12"
-            } as any)}
+          {/* LEFT: Strategic Positioning */}
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="lg:col-span-5"
           >
-            <div className="space-y-6">
-              <Link href="/" className="inline-flex items-center gap-1.5 group">
-                <span className="font-heading text-2xl font-black tracking-tighter text-black uppercase">IS</span>
-                <span className="font-heading text-2xl font-black tracking-tighter text-slate-400 uppercase group-hover:text-black transition-colors">NAP</span>
-              </Link>
-              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[0.95]">
-                Let&apos;s talk <br />
-                <span className="text-slate-400 italic">growth.</span>
-              </h1>
-              <p className="text-lg text-slate-500 max-w-md leading-relaxed">
-                Ready to scale your marketplace presence? Reach out to our experts for a personalized acceleration strategy.
-              </p>
-            </div>
-
-            <div className="grid gap-8">
-              {[
-                { icon: MapPin, title: "Headquarters", content: "HiTech City, Plot no. 90/3, Kavurihills, Madhapur, Hyderabad 500081" },
-                { icon: Phone, title: "Phone", content: "+91 90526 40916" },
-                { icon: Mail, title: "Email", content: "support@isnap.in" },
-                { icon: Clock, title: "Business Hours", content: "Mon - Sat, 10:00 AM - 7:00 PM IST" }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-5 group">
-                  <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm transition-all group-hover:border-black group-hover:bg-black group-hover:text-white">
-                    <item.icon className="h-5 w-5" />
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">{item.title}</p>
-                    <p className="text-sm font-medium text-slate-700 leading-relaxed">{item.content}</p>
-                  </div>
+            <div className="space-y-10">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-enterprise-border bg-enterprise-bg px-4 py-1.5 mb-10">
+                  <span className="h-1.5 w-1.5 rounded-full bg-enterprise-green" />
+                  <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-enterprise-text">Strategic Partnerships</p>
                 </div>
-              ))}
-            </div>
+                <h1 className="section-heading mb-8">
+                  Let&apos;s talk <br />
+                  <span className="text-enterprise-green">growth velocity.</span>
+                </h1>
+                <p className="text-xl text-enterprise-text-muted leading-relaxed max-w-md">
+                  Ready to activate your brand&apos;s marketplace infrastructure? Reach out to our strategists for an institutional audit.
+                </p>
+              </div>
 
-            <div className="pt-6 flex items-center gap-4">
-              {[
-                { icon: Share2, href: "#", label: "LinkedIn" },
-                { icon: Send, href: "#", label: "Twitter" },
-                { icon: Camera, href: "#", label: "Instagram" }
-              ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  className="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition-all hover:border-black hover:text-black hover:shadow-lg active:scale-95"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
+              <div className="space-y-8">
+                {[
+                  { icon: MapPin, title: "Headquarters", content: "HiTech City, Plot no. 90/3, Kavurihills, Hyderabad 500081" },
+                  { icon: Phone, title: "Operations", content: "+91 90526 40916" },
+                  { icon: Mail, title: "Governance", content: "support@isnap.in" },
+                  { icon: Clock, title: "Uptime", content: "Mon - Sat, 10:00 AM - 7:00 PM IST" }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-6 group">
+                    <div className="h-12 w-12 shrink-0 flex items-center justify-center rounded-2xl border border-enterprise-border bg-enterprise-bg group-hover:bg-enterprise-text group-hover:text-white transition-all duration-300">
+                      <item.icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-enterprise-text-muted mb-1">{item.title}</p>
+                      <p className="text-[15px] font-bold text-enterprise-text leading-tight">{item.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-          {/* RIGHT: Contact Form */}
-          <motion.div
-            {...({
-              initial: { opacity: 0, x: 20 },
-              animate: { opacity: 1, x: 0 },
-              transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 },
-              className: "lg:col-span-7"
-            } as any)}
-          >
-            <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-slate-200 via-white to-slate-200 shadow-2xl">
-              <div className="bg-white rounded-[2.25rem] p-8 lg:p-12">
-                <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Share your details</h2>
-                <p className="mt-2 text-slate-500 mb-10 leading-relaxed">Our strategists will analyze your profile and get back to you within 24 hours.</p>
-
-                <form className="space-y-8" onSubmit={handleSubmit(onSubmit)} noValidate>
-                  {isSuccess ? (
-                    <motion.div 
-                      {...({
-                        initial: { opacity: 0, scale: 0.95 },
-                        animate: { opacity: 1, scale: 1 },
-                        className: "flex flex-col items-center justify-center py-12 text-center space-y-4 bg-slate-50 rounded-3xl border border-slate-100"
-                      } as any)}
-                    >
-                      <div className="h-16 w-16 rounded-full bg-black flex items-center justify-center text-white">
-                        <CheckCircle2 className="h-8 w-8" />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="text-xl font-bold text-slate-900">Message Received</h3>
-                        <p className="text-slate-500">We&apos;ll be in touch very soon.</p>
-                      </div>
-                      <Button variant="outline" onClick={() => setIsSuccess(false)} className="mt-4">Send another message</Button>
-                    </motion.div>
-                  ) : (
-                    <>
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Full Name*</label>
-                          <Input 
-                            {...register("fullName")} 
-                            placeholder="Enter name" 
-                            className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 h-14 rounded-2xl px-6"
-                          />
-                          {errors.fullName && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.fullName.message}</p>}
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Company Name*</label>
-                          <Input 
-                            {...register("companyName")} 
-                            placeholder="Enter company" 
-                            className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 h-14 rounded-2xl px-6"
-                          />
-                          {errors.companyName && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.companyName.message}</p>}
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Phone Number*</label>
-                          <Input 
-                            {...register("phone")} 
-                            placeholder="+91..." 
-                            className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 h-14 rounded-2xl px-6"
-                          />
-                          {errors.phone && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.phone.message}</p>}
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Work Email*</label>
-                          <Input 
-                            {...register("email")} 
-                            type="email" 
-                            placeholder="email@company.com" 
-                            className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 h-14 rounded-2xl px-6"
-                          />
-                          {errors.email && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.email.message}</p>}
-                        </div>
-                      </div>
-
-                      <div className="space-y-4">
-                        <p className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Platforms of Interest*</p>
-                        <div className="grid gap-3 sm:grid-cols-2">
-                          {PLATFORM_OPTIONS.map((platform) => {
-                            const checked = selectedPlatforms.includes(platform);
-                            return (
-                              <label
-                                key={platform}
-                                className={cn(
-                                  "group flex cursor-pointer items-center justify-between rounded-2xl border p-4 transition-all duration-200",
-                                  checked 
-                                    ? "bg-black border-black text-white shadow-lg shadow-black/5" 
-                                    : "bg-slate-50/50 border-transparent hover:border-slate-200 hover:bg-white"
-                                )}
-                              >
-                                <span className="text-sm font-semibold">{platform}</span>
-                                <div className="relative flex h-5 w-5 items-center justify-center">
-                                  <input
-                                    type="checkbox"
-                                    checked={checked}
-                                    onChange={(event) => {
-                                      const nextValues = event.target.checked
-                                        ? [...selectedPlatforms, platform]
-                                        : selectedPlatforms.filter((item) => item !== platform);
-                                      setValue("platformInterest", nextValues, { shouldValidate: true });
-                                    }}
-                                    className="peer h-5 w-5 cursor-pointer opacity-0 absolute z-10"
-                                  />
-                                  <div className={cn(
-                                    "h-5 w-5 rounded-full border-2 transition-all flex items-center justify-center",
-                                    checked ? "bg-white border-white" : "border-slate-300 group-hover:border-slate-400"
-                                  )}>
-                                    {checked && <div className="h-2 w-2 rounded-full bg-black" />}
-                                  </div>
-                                </div>
-                              </label>
-                            );
-                          })}
-                        </div>
-                        {errors.platformInterest && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.platformInterest.message}</p>}
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Your Message</label>
-                        <Textarea 
-                          {...register("message")} 
-                          placeholder="Tell us about your goals..." 
-                          className="bg-slate-50/50 border-transparent focus:bg-white focus:border-slate-200 rounded-2xl p-6 min-h-[120px] resize-none"
-                        />
-                        {errors.message && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.message.message}</p>}
-                      </div>
-
-                      {submitError && <p className="text-sm font-bold text-red-500 bg-red-50 p-4 rounded-xl border border-red-100">{submitError}</p>}
-
-                      <Button 
-                        type="submit" 
-                        disabled={isSubmitting} 
-                        className="w-full h-16 rounded-2xl bg-black text-white text-base font-bold hover:bg-slate-800 transition-all shadow-xl shadow-black/10 active:scale-[0.98]"
-                      >
-                        {isSubmitting ? "Processing..." : "Send Message"}
-                      </Button>
-                    </>
-                  )}
-                </form>
+              <div className="flex items-center gap-4">
+                {[Share2, Send].map((Icon, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    className="flex h-12 w-12 items-center justify-center rounded-2xl border border-enterprise-border bg-white text-enterprise-text hover:bg-enterprise-text hover:text-white transition-all shadow-sm"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                ))}
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
+
+          {/* RIGHT: High-Fidelity Lead Form */}
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-7"
+          >
+            <div className="bg-white border border-enterprise-border rounded-[40px] p-8 md:p-12 shadow-premium relative">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-enterprise-green rounded-t-[40px]" />
+              
+              <h2 className="text-3xl font-bold text-enterprise-text tracking-tight mb-4">Inquiry Terminal</h2>
+              <p className="text-enterprise-text-muted mb-10 leading-relaxed max-w-lg">Our architects will analyze your brand profile and initiate a protocol review within 24 hours.</p>
+
+              <form className="space-y-8" onSubmit={handleSubmit(onSubmit)} noValidate>
+                {isSuccess ? (
+                  <MotionDiv 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col items-center justify-center py-16 text-center space-y-6 bg-enterprise-bg/20 rounded-[32px] border border-enterprise-border"
+                  >
+                    <div className="h-20 w-20 rounded-full bg-enterprise-green flex items-center justify-center text-enterprise-text shadow-xl shadow-enterprise-green/20">
+                      <CheckCircle2 className="h-10 w-10" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-2xl font-bold text-enterprise-text">Inquiry Logged</h3>
+                      <p className="text-enterprise-text-muted">Your message has been transmitted to our strategic hub.</p>
+                    </div>
+                    <Button variant="outline" onClick={() => setIsSuccess(false)} className="rounded-2xl border-enterprise-border hover:bg-white transition-all h-12 px-8">Send New Message</Button>
+                  </MotionDiv>
+                ) : (
+                  <>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-enterprise-text-muted ml-1">Full Name*</label>
+                        <Input 
+                          {...register("fullName")} 
+                          placeholder="Enter name" 
+                          className="bg-enterprise-bg/20 border-transparent focus:bg-white focus:border-enterprise-green/50 focus:ring-4 focus:ring-enterprise-green/5 h-14 rounded-2xl px-6 transition-all"
+                        />
+                        {errors.fullName && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.fullName.message}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-enterprise-text-muted ml-1">Company Name*</label>
+                        <Input 
+                          {...register("companyName")} 
+                          placeholder="Enter company" 
+                          className="bg-enterprise-bg/20 border-transparent focus:bg-white focus:border-enterprise-green/50 focus:ring-4 focus:ring-enterprise-green/5 h-14 rounded-2xl px-6 transition-all"
+                        />
+                        {errors.companyName && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.companyName.message}</p>}
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-enterprise-text-muted ml-1">Phone Number*</label>
+                        <Input 
+                          {...register("phone")} 
+                          placeholder="+91..." 
+                          className="bg-enterprise-bg/20 border-transparent focus:bg-white focus:border-enterprise-green/50 focus:ring-4 focus:ring-enterprise-green/5 h-14 rounded-2xl px-6 transition-all"
+                        />
+                        {errors.phone && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.phone.message}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-enterprise-text-muted ml-1">Work Email*</label>
+                        <Input 
+                          {...register("email")} 
+                          type="email" 
+                          placeholder="email@company.com" 
+                          className="bg-enterprise-bg/20 border-transparent focus:bg-white focus:border-enterprise-green/50 focus:ring-4 focus:ring-enterprise-green/5 h-14 rounded-2xl px-6 transition-all"
+                        />
+                        {errors.email && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.email.message}</p>}
+                      </div>
+                    </div>
+
+                    <div className="space-y-5">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-enterprise-text-muted ml-1">Platforms of Interest*</p>
+                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {PLATFORM_OPTIONS.map((platform) => {
+                          const checked = selectedPlatforms.includes(platform);
+                          return (
+                            <label
+                              key={platform}
+                              className={cn(
+                                "group flex cursor-pointer items-center justify-between rounded-2xl border p-4 transition-all duration-300",
+                                checked 
+                                  ? "bg-enterprise-text border-enterprise-text text-white" 
+                                  : "bg-enterprise-bg/20 border-transparent hover:border-enterprise-green/30 hover:bg-white"
+                              )}
+                            >
+                              <span className="text-[11px] font-bold uppercase tracking-tight">{platform}</span>
+                              <div className="relative flex h-5 w-5 items-center justify-center">
+                                <input
+                                  type="checkbox"
+                                  checked={checked}
+                                  onChange={(event) => {
+                                    const nextValues = event.target.checked
+                                      ? [...selectedPlatforms, platform]
+                                      : selectedPlatforms.filter((item) => item !== platform);
+                                    setValue("platformInterest", nextValues, { shouldValidate: true });
+                                  }}
+                                  className="peer h-5 w-5 cursor-pointer opacity-0 absolute z-10"
+                                />
+                                <div className={cn(
+                                  "h-4 w-4 rounded-full border-2 transition-all flex items-center justify-center",
+                                  checked ? "bg-enterprise-green border-enterprise-green" : "border-enterprise-border group-hover:border-enterprise-green/50"
+                                )}>
+                                  {checked && <div className="h-1.5 w-1.5 rounded-full bg-enterprise-text" />}
+                                </div>
+                              </div>
+                            </label>
+                          );
+                        })}
+                      </div>
+                      {errors.platformInterest && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.platformInterest.message}</p>}
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-enterprise-text-muted ml-1">Strategic Goals</label>
+                      <Textarea 
+                        {...register("message")} 
+                        placeholder="Tell us about your brand vision..." 
+                        className="bg-enterprise-bg/20 border-transparent focus:bg-white focus:border-enterprise-green/50 focus:ring-4 focus:ring-enterprise-green/5 rounded-2xl p-6 min-h-[140px] resize-none transition-all"
+                      />
+                      {errors.message && <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mt-1 ml-1">{errors.message.message}</p>}
+                    </div>
+
+                    {submitError && <p className="text-[10px] font-bold text-red-500 bg-red-50 p-4 rounded-2xl border border-red-100 uppercase tracking-widest">{submitError}</p>}
+
+                    <Button 
+                      type="submit" 
+                      disabled={isSubmitting} 
+                      className="w-full h-16 rounded-2xl bg-enterprise-text text-white text-[13px] font-bold uppercase tracking-widest hover:bg-enterprise-green hover:text-enterprise-text transition-all shadow-xl shadow-enterprise-text/10 active:scale-[0.98]"
+                    >
+                      {isSubmitting ? "Transmitting..." : "Send Strategic Inquiry"}
+                    </Button>
+                  </>
+                )}
+              </form>
+            </div>
+          </MotionDiv>
         </div>
       </div>
     </section>

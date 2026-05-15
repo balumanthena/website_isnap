@@ -73,7 +73,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
 
 export function Footer() {
   return (
-    <footer className="relative bg-enterprise-text pt-20 pb-16 text-white overflow-hidden">
+    <footer className="relative bg-enterprise-text pt-20 pb-10 text-white overflow-hidden">
       {/* Structural Anchor */}
       <div className="absolute inset-0 grid-subtle opacity-[0.05] pointer-events-none" />
       
@@ -133,7 +133,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-40 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-12">
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <p className="text-[12px] font-medium text-white/20">
               © {new Date().getFullYear()} ISNAP Operating Systems. All rights reserved.

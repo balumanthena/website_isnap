@@ -27,9 +27,11 @@ export function HeroSection() {
                 The centralized platform for marketplace operations, inventory synchronization, and automated cataloging for 200+ global brands.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Get Started
-                </Button>
+                <Link href="/get-started" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full">
+                    Get Started
+                  </Button>
+                </Link>
                 <Link href="/contact" className="h-[54px] flex items-center px-10 border border-enterprise-border rounded-full text-[13px] font-bold uppercase tracking-widest text-enterprise-text hover:bg-enterprise-bg transition-all w-full sm:w-auto justify-center">
                   Book a Demo
                 </Link>
